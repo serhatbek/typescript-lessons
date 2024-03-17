@@ -1,4 +1,22 @@
-// SECTION - Type : Any >
+/* -------------------------------------------------------------------------- */
+// SECTION - Example
+const books = ['1984', 'Brave New World', 'Fahrenheit 451'];
+
+let foundBook: string | undefined;
+
+for (const book of books) {
+  if (book === '1984') {
+    foundBook = book;
+    foundBook = foundBook.toUpperCase();
+    break;
+  }
+}
+
+console.log('foundBook 🩷🩷🩷', foundBook);
+console.log('foundBook 🩷🩷🩷', foundBook?.length);
+
+/* -------------------------------------------------------------------------- */
+// SECTION - Type : Any
 
 let notSure: any = 4;
 
@@ -9,7 +27,7 @@ notSure = (name: string) => {
 console.log(notSure('Bedirhan'));
 
 /* -------------------------------------------------------------------------- */
-//SECTION - Union Type >
+//SECTION - Union Type
 
 // let tax: number | string = 20;
 // tax = '6';
@@ -25,7 +43,7 @@ console.log(notSure('Bedirhan'));
 
 /* -------------------------------------------------------------------------- */
 
-//SECTION - Type Annotations >
+//SECTION - Type Annotations
 
 // let animal: string = 'Cat';
 // animal.concat(', loves milk.');
