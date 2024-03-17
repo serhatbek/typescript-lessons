@@ -1,16 +1,31 @@
-let tax: number | string = 20;
-tax = '6';
+// SECTION - Type : Any >
 
-console.log(tax);
-let requestStatus: 'pending' | 'error' | 'success' = 'pending';
+let notSure: any = 4;
 
-requestStatus = 'error';
-requestStatus = 'success';
+notSure = (name: string) => {
+  return name;
+};
+
+console.log(notSure('Bedirhan'));
+
+/* -------------------------------------------------------------------------- */
+//SECTION - Union Type >
+
+// let tax: number | string = 20;
+// tax = '6';
+
+// console.log(tax);
+// let requestStatus: 'pending' | 'error' | 'success' = 'pending';
+
+// requestStatus = 'error';
+// requestStatus = 'success';
 // requestStatus = 'random';
 
-console.log(requestStatus);
+// console.log(requestStatus);
 
-//-------------------------
+/* -------------------------------------------------------------------------- */
+
+//SECTION - Type Annotations >
 
 // let animal: string = 'Cat';
 // animal.concat(', loves milk.');
