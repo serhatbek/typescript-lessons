@@ -1,4 +1,21 @@
 /* -------------------------------------------------------------------------- */
+// SECTION - Arrays
+let temperatures: number[] = [20, 18, 41];
+temperatures.push(38);
+// temperatures.push('36'); // NOTE -Argument of type 'string' is not assignable to parameter of type 'number'.
+console.log(temperatures);
+
+let colors: string[] = ['yellow', 'blue', 'red'];
+// colors.push(20); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.
+colors.push('green');
+console.log(colors);
+
+let mixedArray: (string | number)[] = ['apple', 6, 'banana', 8];
+// mixedArray.push(true); //NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+mixedArray.push('cat');
+console.log(mixedArray);
+
+/* -------------------------------------------------------------------------- */
 // SECTION - Challenge - Union Type
 let orderStatus: 'shipped' | 'delivered' | 'processing' = 'processing';
 orderStatus = 'delivered';
