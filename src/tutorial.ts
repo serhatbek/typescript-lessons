@@ -1,13 +1,12 @@
-console.log('typescript tutorial');
+let animal: string = 'Cat';
+animal.concat(', loves milk.');
 
-interface someValue {
-  name: string;
-  id: number;
-}
+let water: boolean = true;
+water.valueOf();
 
-const someObject: someValue = {
-  name: 'Serhat',
-  id: 6,
-};
+let num: number = 6;
+num.toExponential();
 
-console.log(someObject);
+console.log(animal);
+console.log(water);
+console.log(num);
