@@ -1,4 +1,17 @@
 /* -------------------------------------------------------------------------- */
+// SECTION - Challenge - Union Type
+let orderStatus: 'shipped' | 'delivered' | 'processing' = 'processing';
+orderStatus = 'delivered';
+orderStatus = 'shipped';
+// orderStatus = 'cancelled'; // Type '"cancelled"' is not assignable to type '"shipped" | "delivered" | "processing"'.
+
+let discount: string | number = 20;
+discount = '20%';
+// discount = true; // Type 'boolean' is not assignable to type 'string | number'.
+
+console.log('union type 🩷🩷🩷', orderStatus, discount);
+
+/* -------------------------------------------------------------------------- */
 // SECTION - Example
 const books = ['1984', 'Brave New World', 'Fahrenheit 451'];
 
