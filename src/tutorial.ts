@@ -69,6 +69,12 @@ const sum = (message: string, ...numbers: number[]): string => {
 let sumResult = sum('The total is : ', 1, 2, 3, 4, 5, 6);
 console.log(sumResult);
 
+// Void Keyword
+const logMessage = (message: string) => {
+  console.log(message);
+};
+logMessage('Hello, Typescript');
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
 
