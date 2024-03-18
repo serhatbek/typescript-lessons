@@ -88,6 +88,39 @@ processInput(21);
 processInput('Dog barks a lot');
 processInput(42);
 
+// Objects As Parameters
+const createEmployee = ({
+  id,
+}: {
+  id: number;
+}): { id: number; isActive: boolean } => {
+  return {
+    id,
+    isActive: id % 2 === 0,
+  };
+};
+const employee = createEmployee({ id: 6 });
+const employee2 = createEmployee({ id: 9 });
+console.log(employee, employee2);
+
+// Challenge
+const processData = (
+  input: number | string,
+  config: { reverse: boolean } = { reverse: false }
+): number | string => {
+  if (typeof input === 'number') {
+    return input * input;
+  } else {
+    return config.reverse
+      ? input.split('').reverse().join('')
+      : input.toUpperCase();
+  }
+};
+
+console.log(processData(10));
+console.log(processData('Hello World'));
+console.log(processData('Hello World', { reverse: true }));
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
 
