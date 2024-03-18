@@ -1,4 +1,40 @@
 /* -------------------------------------------------------------------------- */
+// SECTION - Functions
+
+const sayHi = (name: string) => {
+  console.log(`Hello ${name}, welcome to typescript!`);
+};
+// sayHi(8); //NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
+sayHi('Serhat');
+
+// Functions - Returns
+const calculateDiscount = (price: number): number => {
+  // Return value type
+  return price * 0.9;
+};
+const finalPrice = calculateDiscount(200);
+console.log(finalPrice);
+
+//---
+const addThree = (num: number): number => {
+  let anotherNumber: number = 3;
+  return num + anotherNumber;
+};
+const result = addThree(3);
+const someValue = result;
+console.log(result);
+
+//--- Challenge
+const names = ['Serhat', 'Toprak', 'Züleyha', 'Melike', 'Bahar'];
+const checkNameAvailable = (name: string): boolean => {
+  return names.includes(name);
+};
+const name1 = checkNameAvailable('Ensar');
+const name2 = checkNameAvailable('Bahar');
+const name3 = checkNameAvailable('Melike');
+console.log(name1, name2, name3);
+
+/* -------------------------------------------------------------------------- */
 // SECTION - Objects
 let book = { title: 'book', cost: 20 };
 let pen = { title: 'pen', cost: 18 };
@@ -16,6 +52,7 @@ let products: { title: string; price?: number }[] = [
   { title: 'phone', price: 44 },
   { title: 'tv' },
 ];
+console.log(products);
 
 /* -------------------------------------------------------------------------- */
 // SECTION - Arrays
