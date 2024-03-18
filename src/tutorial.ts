@@ -7,7 +7,7 @@ const sayHi = (name: string) => {
 // sayHi(8); //NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
 sayHi('Serhat');
 
-// Functions - Returns
+// Function Returns
 const calculateDiscount = (price: number): number => {
   // Return value type
   return price * 0.9;
@@ -25,14 +25,37 @@ const someValue = result;
 console.log(result);
 
 //--- Challenge
-const names = ['Serhat', 'Toprak', 'Züleyha', 'Melike', 'Bahar'];
-const checkNameAvailable = (name: string): boolean => {
+const names: string[] = ['Serhat', 'Toprak', 'Züleyha', 'Melike', 'Bahar'];
+const isNameAvailable = (name: string): boolean => {
   return names.includes(name);
 };
-const name1 = checkNameAvailable('Ensar');
-const name2 = checkNameAvailable('Bahar');
-const name3 = checkNameAvailable('Melike');
-console.log(name1, name2, name3);
+const nameToCheck: string = 'Melike';
+if (isNameAvailable(nameToCheck)) {
+  console.log(`${nameToCheck} is in the list.`);
+} else {
+  console.log(`${nameToCheck} is not in the list.`);
+}
+
+// Optional Parameters
+const calculatePrice = (price: number, discount?: number): number => {
+  return price - (discount || 0); //NOTE - 'discount' is possibly 'undefined'. So wee need to give a fallback value like 0 in the example
+};
+
+let priceAfterDiscount = calculatePrice(100, 20);
+console.log(priceAfterDiscount);
+
+// Default Parameters
+const calculateScore = (
+  initialScore: number,
+  penaltyPoints: number = 0
+): number => {
+  return initialScore - penaltyPoints;
+};
+
+let scoreAfterPenalty = calculateScore(100, 20);
+let scoreWithoutPenalty = calculateScore(200);
+console.log('scoreAfterPenalty', scoreAfterPenalty);
+console.log('scoreWithoutPenalty', scoreWithoutPenalty);
 
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
