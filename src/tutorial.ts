@@ -57,8 +57,21 @@ let scoreWithoutPenalty = calculateScore(200);
 console.log('scoreAfterPenalty', scoreAfterPenalty);
 console.log('scoreWithoutPenalty', scoreWithoutPenalty);
 
+// Rest Parameter
+const sum = (message: string, ...numbers: number[]): string => {
+  let total = numbers.reduce((prev, current) => {
+    return prev + current;
+  }, 0);
+
+  return `${message} ${total}.`;
+};
+
+let sumResult = sum('The total is : ', 1, 2, 3, 4, 5, 6);
+console.log(sumResult);
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
+
 let book = { title: 'book', cost: 20 };
 let pen = { title: 'pen', cost: 18 };
 let notebook = { title: 'notebook' };
