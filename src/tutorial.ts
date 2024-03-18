@@ -73,7 +73,20 @@ console.log(sumResult);
 const logMessage = (message: string) => {
   console.log(message);
 };
-logMessage('Hello, Typescript');
+logMessage('Hello, Typescript'); // const logMessage: (message: string) => void // NOTE - Void indicates that function does not return a value
+
+// Challenge - ype Guards
+const processInput = (val: string | number) => {
+  if (typeof val === 'number') {
+    console.log('Multiply number by 2:', val * 2);
+  } else if (typeof val === 'string') {
+    console.log('String to uppercase:', val.toUpperCase());
+  }
+};
+processInput('cat meows a lot');
+processInput(21);
+processInput('Dog barks a lot');
+processInput(42);
 
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
