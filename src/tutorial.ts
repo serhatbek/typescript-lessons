@@ -1,4 +1,22 @@
 /* -------------------------------------------------------------------------- */
+//SECTION -  Interface - Fundamentals
+interface BookType {
+  readonly isbn: number;
+  title: string;
+  author: string;
+  genre?: string;
+}
+
+const deepWork: BookType = {
+  isbn: 123,
+  title: 'Deep Work',
+  author: 'Cal Newport',
+  // genre: 'self-help', // Since genre is optional we can use it or not
+};
+
+// deepWork.isbn = 'fgfg' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
+
+/* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
 type Book = { id: number; name: string; price: number };
 type DiscountedBook = Book & { discount: number }; // Or we can assign a new type for Intersection Type
