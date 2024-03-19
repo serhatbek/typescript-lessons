@@ -121,6 +121,82 @@ console.log(processData(10));
 console.log(processData('Hello World'));
 console.log(processData('Hello World', { reverse: true }));
 
+// Type Alias
+
+type User = {
+  id: number;
+  name: string;
+  isActive: boolean;
+};
+
+const john: User = {
+  id: 1,
+  name: 'john',
+  isActive: true,
+};
+const susan: User = {
+  id: 1,
+  name: 'susan',
+  isActive: false,
+};
+
+function createUser(user: User): User {
+  console.log(`Hello there ${user.name.toUpperCase()} !!!`);
+
+  return user;
+}
+
+createUser(john);
+createUser(susan);
+createUser({ id: 6, name: 'Serhat', isActive: true });
+
+// Challenge
+type Employee = {
+  id: number;
+  name: string;
+  department: string;
+};
+
+type Manager = {
+  id: number;
+  name: string;
+  employees: Employee[];
+};
+
+type Stuff = Manager | Employee;
+
+const alice: Employee = {
+  id: 6,
+  name: 'Alice',
+  department: 'Frontend Development',
+};
+const steve: Employee = {
+  id: 9,
+  name: 'Steve',
+  department: 'UX Design',
+};
+const bob: Manager = {
+  id: 3,
+  name: 'Bob',
+  employees: [alice, steve],
+};
+
+const printStuffDetails = (stuff: Stuff): void => {
+  if ('employees' in stuff) {
+    console.log(
+      `${stuff.name} is a manager and has ${stuff.employees.length} employees.`
+    );
+  } else {
+    console.log(
+      `${stuff.name} is an employee and in ${stuff.department} department.`
+    );
+  }
+};
+
+printStuffDetails(bob);
+printStuffDetails(alice);
+printStuffDetails(steve);
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Objects
 
