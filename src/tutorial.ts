@@ -1,4 +1,19 @@
 /* -------------------------------------------------------------------------- */
+// SECTION - Intersection Type
+type Book = { id: number; name: string; price: number };
+type DiscountedBook = Book & { discount: number }; // Or we can assign a new type for Intersection Type
+
+const book1: Book = { id: 1, name: 'How to cook a dragon', price: 26 };
+const book2: Book = { id: 2, name: 'Secret life of unicorns', price: 29 };
+const discountedBook: Book & { discount: number } = {
+  // use Intersection Type with & to add more types
+  id: 6,
+  name: 'Goblins vs Gnomes: The Ultimate Guide',
+  price: 23,
+  discount: 0.15,
+};
+
+/* -------------------------------------------------------------------------- */
 // SECTION - Functions
 
 const sayHi = (name: string) => {
