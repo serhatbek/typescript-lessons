@@ -5,6 +5,10 @@ interface BookType {
   title: string;
   author: string;
   genre?: string;
+  // method
+  printAuthor(): void;
+  // printTitle: () => void
+  printTitle(message: string): string;
 }
 
 const deepWork: BookType = {
@@ -12,8 +16,18 @@ const deepWork: BookType = {
   title: 'Deep Work',
   author: 'Cal Newport',
   // genre: 'self-help', // Since genre is optional we can use it or not
+  printAuthor() {
+    console.log('deepWork author', this.author);
+  },
+  // printTitle: () => console.log(author)
+  printTitle(message) {
+    return `${this.title} ${message}`;
+  },
 };
 
+deepWork.printAuthor();
+console.log(deepWork.printTitle('is nice book.'));
+// deepWork.printTitle(deepWork.title);
 // deepWork.isbn = 'fgfg' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
 
 /* -------------------------------------------------------------------------- */
