@@ -7,7 +7,6 @@ interface BookType {
   genre?: string;
   // method
   printAuthor(): void;
-  // printTitle: () => void
   printTitle(message: string): string;
 }
 
@@ -19,7 +18,6 @@ const deepWork: BookType = {
   printAuthor() {
     console.log('deepWork author', this.author);
   },
-  // printTitle: () => console.log(author)
   printTitle(message) {
     return `${this.title} ${message}`;
   },
@@ -27,9 +25,30 @@ const deepWork: BookType = {
 
 deepWork.printAuthor();
 console.log(deepWork.printTitle('is nice book.'));
-// deepWork.printTitle(deepWork.title);
 // deepWork.isbn = 'fgfg' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
 
+// Challenge - Interface I
+interface Computer {
+  readonly id: number;
+  brand: string;
+  ram: number;
+  storage?: number;
+  upgradeRam(increase: number): number;
+}
+
+const pcLaptop: Computer = {
+  id: 2,
+  brand: 'Dell',
+  ram: 8,
+  upgradeRam(increase) {
+    this.ram += increase;
+    return this.ram;
+  },
+};
+
+console.log(pcLaptop.upgradeRam(8));
+pcLaptop.storage = 256;
+console.log(pcLaptop);
 /* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
 type Book = { id: number; name: string; price: number };
