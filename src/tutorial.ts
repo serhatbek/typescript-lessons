@@ -93,6 +93,67 @@ const worker: EmployeeNew = {
 
 console.log(worker.getDetails());
 
+interface ManagerNew extends Person, DogOwner {
+  managePeople(): void;
+}
+
+const newManager: ManagerNew = {
+  name: 'Bob',
+  age: 34,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  },
+  dogName: 'Rex',
+  getDogDetails() {
+    return `Dog Name: ${this.dogName}`;
+  },
+  managePeople() {
+    console.log('Managing people...');
+  },
+};
+
+console.log(newManager.getDetails());
+console.log(newManager.getDogDetails());
+console.log(newManager.managePeople());
+
+// Challenge - Interface II
+interface Member {
+  name: string;
+}
+
+interface PetOwner extends Member {
+  dogName: string;
+}
+
+interface Director extends Member {
+  managePeople(): void;
+  delegateTasks(): void;
+}
+
+function getMember(): Member | PetOwner | Director {
+  let randomNumber = Math.random() * 1;
+
+  if (randomNumber < 0.33) {
+    return {
+      name: 'Susan',
+    };
+  } else if (randomNumber > 0.33 && randomNumber < 0.66) {
+    return {
+      name: 'Clarke',
+      dogName: 'Boxer',
+    };
+  } else {
+    return {
+      name: 'John',
+      managePeople: () => console.log('Managing people...'),
+      delegateTasks: () => console.log('Delegating tasks...'),
+    };
+  }
+}
+
+const user: Member | PetOwner | Director = getMember();
+console.log(user);
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
 type Book = { id: number; name: string; price: number };
