@@ -49,6 +49,50 @@ const pcLaptop: Computer = {
 console.log(pcLaptop.upgradeRam(8));
 pcLaptop.storage = 256;
 console.log(pcLaptop);
+
+//  Interface - Merge and Extend
+interface Person {
+  name: string;
+  getDetails(): string;
+}
+// Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
+interface Person {
+  age: number;
+}
+
+interface DogOwner {
+  dogName: string;
+  getDogDetails(): string;
+}
+
+const person: Person = {
+  name: 'John',
+  age: 38,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  },
+};
+
+console.log(person.getDetails());
+
+// Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface.
+// You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
+
+interface EmployeeNew extends Person {
+  employeeId: number;
+}
+
+const worker: EmployeeNew = {
+  employeeId: 4335344,
+  name: 'Mike',
+  age: 42,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}, Employee ID: ${this.employeeId}`;
+  },
+};
+
+console.log(worker.getDetails());
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
 type Book = { id: number; name: string; price: number };
