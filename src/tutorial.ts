@@ -1,20 +1,42 @@
 // /* -------------------------------------------------------------------------- */
+// //SECTION - Enum
+enum ServerResponseStatus {
+  Success,
+  Error,
+}
+console.log(ServerResponseStatus);
+
+interface ServerResponse {
+  result: ServerResponseStatus;
+  data: string[];
+}
+
+const getServerResponse = (): ServerResponse => {
+  return {
+    result: ServerResponseStatus.Success,
+    data: ['first item', 'second item'],
+  };
+};
+const response: ServerResponse = getServerResponse();
+console.log(response);
+
+// /* -------------------------------------------------------------------------- */
 // //SECTION - Tuple
 // Used for fixed length, fixed type ordered arrays
 // Order and length should match
-// We can use optional parameter
 // Readonly is needed, but with readonly, optional parameter can not be used.
-let person: [string, number] = ['simon', 36];
-let date: readonly [number, number, number, number] = [23, 5345, 65768, 7876];
+// let person: [string, number] = ['simon', 36];
+// let date: readonly [number, number, number, number] = [23, 5345, 65768, 7876];
 
-const getPerson = (): [string, number] => {
-  return ['apple', 6];
-};
-console.log(getPerson());
-console.log(getPerson()[0]);
-console.log(getPerson()[1]);
+// const getPerson = (): [string, number] => {
+//   return ['apple', 6];
+// };
+// console.log(getPerson());
+// console.log(getPerson()[0]);
+// console.log(getPerson()[1]);
 
-let adam: [string, number?] = ['Eve'];
+// // We can use optional parameter
+// let adam: [string, number?] = ['Eve'];
 
 // /* -------------------------------------------------------------------------- */
 // NOTE - Type alias can also be used with primitive and literal type too.
