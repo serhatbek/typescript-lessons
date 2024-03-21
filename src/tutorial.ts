@@ -152,14 +152,20 @@ function getMember(): Member | PetOwner | Director {
 }
 
 const user: Member | PetOwner | Director = getMember();
-console.log(user);
+console.log('user', user);
 
 //--- Interface - Type Predicate
-function isUser(obj: Member | PetOwner | Director): boolean {
+// function isUser(obj: Member | PetOwner | Director): boolean {
+//   return 'managePeople' in obj;
+// }
+// console.log(isUser(user));
+// Or
+function isUser(obj: Member | PetOwner | Director): obj is Director {
   return 'managePeople' in obj;
 }
-
-console.log(isUser(user));
+if (isUser(user)) {
+  console.log('is user', user.delegateTasks());
+}
 
 /* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
