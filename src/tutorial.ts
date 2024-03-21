@@ -1,24 +1,45 @@
 // /* -------------------------------------------------------------------------- */
+// //SECTION - Enum / Reverse Mapping
+
+enum Days {
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
+  Sunday = 7,
+}
+
+console.log(Days);
+Object.values(Days).forEach((val) => {
+  if (typeof val === 'number') {
+    console.log(val);
+  }
+});
+console.log('Turn days values into an array', Object.values(Days));
+
+// /* -------------------------------------------------------------------------- */
 // //SECTION - Enum
-enum ServerResponseStatus {
-  Success,
-  Error,
-}
-console.log(ServerResponseStatus);
+// enum ServerResponseStatus {
+//   Success,
+//   Error,
+// }
+// console.log(ServerResponseStatus);
 
-interface ServerResponse {
-  result: ServerResponseStatus;
-  data: string[];
-}
+// interface ServerResponse {
+//   result: ServerResponseStatus;
+//   data: string[];
+// }
 
-const getServerResponse = (): ServerResponse => {
-  return {
-    result: ServerResponseStatus.Success,
-    data: ['first item', 'second item'],
-  };
-};
-const response: ServerResponse = getServerResponse();
-console.log(response);
+// const getServerResponse = (): ServerResponse => {
+//   return {
+//     result: ServerResponseStatus.Success,
+//     data: ['first item', 'second item'],
+//   };
+// };
+// const response: ServerResponse = getServerResponse();
+// console.log(response);
 
 // /* -------------------------------------------------------------------------- */
 // //SECTION - Tuple
