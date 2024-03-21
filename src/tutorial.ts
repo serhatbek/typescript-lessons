@@ -25,7 +25,7 @@ const deepWork: BookType = {
 
 deepWork.printAuthor();
 console.log(deepWork.printTitle('is nice book.'));
-// deepWork.isbn = 'fgfg' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
+// deepWork.isbn = 'bum' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
 
 // Challenge - Interface I
 interface Computer {
@@ -55,7 +55,7 @@ interface Person {
   name: string;
   getDetails(): string;
 }
-// Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
+// NOTE - Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
 interface Person {
   age: number;
 }
@@ -75,8 +75,8 @@ const person: Person = {
 
 console.log(person.getDetails());
 
-// Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface.
-// You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
+// NOTE -  Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface.
+// NOTE -  You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
 
 interface EmployeeNew extends Person {
   employeeId: number;
@@ -154,6 +154,13 @@ function getMember(): Member | PetOwner | Director {
 const user: Member | PetOwner | Director = getMember();
 console.log(user);
 
+//--- Interface - Type Predicate
+function isUser(obj: Member | PetOwner | Director): boolean {
+  return 'managePeople' in obj;
+}
+
+console.log(isUser(user));
+
 /* -------------------------------------------------------------------------- */
 // SECTION - Intersection Type
 type Book = { id: number; name: string; price: number };
@@ -175,7 +182,7 @@ const discountedBook: Book & { discount: number } = {
 const sayHi = (name: string) => {
   console.log(`Hello ${name}, welcome to typescript!`);
 };
-// sayHi(8); //NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
+// sayHi(8); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
 sayHi('Serhat');
 
 // Function Returns
@@ -402,7 +409,7 @@ colors.push('green');
 console.log(colors);
 
 let mixedArray: (string | number)[] = ['apple', 6, 'banana', 8];
-// mixedArray.push(true); //NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+// mixedArray.push(true); // NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
 mixedArray.push('cat');
 console.log(mixedArray);
 
