@@ -1,493 +1,515 @@
-/* -------------------------------------------------------------------------- */
-//SECTION -  Interface - Fundamentals
-interface BookType {
-  readonly isbn: number;
-  title: string;
-  author: string;
-  genre?: string;
-  // method
-  printAuthor(): void;
-  printTitle(message: string): string;
-}
+// /* -------------------------------------------------------------------------- */
+// //SECTION - Tuple
+// Used for fixed length, fixed type ordered arrays
+// Order and length should match
+// We can use optional parameter
+// Readonly is needed, but with readonly, optional parameter can not be used.
+let person: [string, number] = ['simon', 36];
+let date: readonly [number, number, number, number] = [23, 5345, 65768, 7876];
 
-const deepWork: BookType = {
-  isbn: 123,
-  title: 'Deep Work',
-  author: 'Cal Newport',
-  // genre: 'self-help', // Since genre is optional we can use it or not
-  printAuthor() {
-    console.log('deepWork author', this.author);
-  },
-  printTitle(message) {
-    return `${this.title} ${message}`;
-  },
+const getPerson = (): [string, number] => {
+  return ['apple', 6];
 };
+console.log(getPerson());
+console.log(getPerson()[0]);
+console.log(getPerson()[1]);
 
-deepWork.printAuthor();
-console.log(deepWork.printTitle('is nice book.'));
-// deepWork.isbn = 'bum' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
+let adam: [string, number?] = ['Eve'];
 
-// Challenge - Interface I
-interface Computer {
-  readonly id: number;
-  brand: string;
-  ram: number;
-  storage?: number;
-  upgradeRam(increase: number): number;
-}
+// /* -------------------------------------------------------------------------- */
+// NOTE - Type alias can also be used with primitive and literal type too.
+// NOTE - We can use intersection types (&) to add additional properties with type alias.
+// NOTE - Computed properties can only be done with type alias.
+// NOTE - Interface can merge, reopen and extend types. Wo can't do it with type alias.
+// //SECTION - Interface - Fundamentals
+// interface BookType {
+//   readonly isbn: number;
+//   title: string;
+//   author: string;
+//   genre?: string;
+//   // method
+//   printAuthor(): void;
+//   printTitle(message: string): string;
+// }
 
-const pcLaptop: Computer = {
-  id: 2,
-  brand: 'Dell',
-  ram: 8,
-  upgradeRam(increase) {
-    this.ram += increase;
-    return this.ram;
-  },
-};
+// const deepWork: BookType = {
+//   isbn: 123,
+//   title: 'Deep Work',
+//   author: 'Cal Newport',
+//   // genre: 'self-help', // Since genre is optional we can use it or not
+//   printAuthor() {
+//     console.log('deepWork author', this.author);
+//   },
+//   printTitle(message) {
+//     return `${this.title} ${message}`;
+//   },
+// };
 
-console.log(pcLaptop.upgradeRam(8));
-pcLaptop.storage = 256;
-console.log(pcLaptop);
+// deepWork.printAuthor();
+// console.log(deepWork.printTitle('is nice book.'));
+// // deepWork.isbn = 'bum' //  Cannot assign to 'isbn' because it is a read-only property.ts(2540)
 
-//  Interface - Merge and Extend
-interface Person {
-  name: string;
-  getDetails(): string;
-}
-// NOTE - Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
-interface Person {
-  age: number;
-}
+// // Challenge - Interface I
+// interface Computer {
+//   readonly id: number;
+//   brand: string;
+//   ram: number;
+//   storage?: number;
+//   upgradeRam(increase: number): number;
+// }
 
-interface DogOwner {
-  dogName: string;
-  getDogDetails(): string;
-}
+// const pcLaptop: Computer = {
+//   id: 2,
+//   brand: 'Dell',
+//   ram: 8,
+//   upgradeRam(increase) {
+//     this.ram += increase;
+//     return this.ram;
+//   },
+// };
 
-const person: Person = {
-  name: 'John',
-  age: 38,
-  getDetails() {
-    return `Name: ${this.name}, Age: ${this.age}`;
-  },
-};
+// console.log(pcLaptop.upgradeRam(8));
+// pcLaptop.storage = 256;
+// console.log(pcLaptop);
 
-console.log(person.getDetails());
+// //  Interface - Merge and Extend
+// interface Person {
+//   name: string;
+//   getDetails(): string;
+// }
+// // NOTE - Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
+// interface Person {
+//   age: number;
+// }
 
-// NOTE -  Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface.
-// NOTE -  You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
+// interface DogOwner {
+//   dogName: string;
+//   getDogDetails(): string;
+// }
 
-interface EmployeeNew extends Person {
-  employeeId: number;
-}
+// const person: Person = {
+//   name: 'John',
+//   age: 38,
+//   getDetails() {
+//     return `Name: ${this.name}, Age: ${this.age}`;
+//   },
+// };
 
-const worker: EmployeeNew = {
-  employeeId: 4335344,
-  name: 'Mike',
-  age: 42,
-  getDetails() {
-    return `Name: ${this.name}, Age: ${this.age}, Employee ID: ${this.employeeId}`;
-  },
-};
+// console.log(person.getDetails());
 
-console.log(worker.getDetails());
+// // NOTE -  Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface.
+// // NOTE -  You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
 
-interface ManagerNew extends Person, DogOwner {
-  managePeople(): void;
-}
+// interface EmployeeNew extends Person {
+//   employeeId: number;
+// }
 
-const newManager: ManagerNew = {
-  name: 'Bob',
-  age: 34,
-  getDetails() {
-    return `Name: ${this.name}, Age: ${this.age}`;
-  },
-  dogName: 'Rex',
-  getDogDetails() {
-    return `Dog Name: ${this.dogName}`;
-  },
-  managePeople() {
-    console.log('Managing people...');
-  },
-};
+// const worker: EmployeeNew = {
+//   employeeId: 4335344,
+//   name: 'Mike',
+//   age: 42,
+//   getDetails() {
+//     return `Name: ${this.name}, Age: ${this.age}, Employee ID: ${this.employeeId}`;
+//   },
+// };
 
-console.log(newManager.getDetails());
-console.log(newManager.getDogDetails());
-console.log(newManager.managePeople());
+// console.log(worker.getDetails());
 
-// Challenge - Interface II
-interface Member {
-  name: string;
-}
+// interface ManagerNew extends Person, DogOwner {
+//   managePeople(): void;
+// }
 
-interface PetOwner extends Member {
-  dogName: string;
-}
+// const newManager: ManagerNew = {
+//   name: 'Bob',
+//   age: 34,
+//   getDetails() {
+//     return `Name: ${this.name}, Age: ${this.age}`;
+//   },
+//   dogName: 'Rex',
+//   getDogDetails() {
+//     return `Dog Name: ${this.dogName}`;
+//   },
+//   managePeople() {
+//     console.log('Managing people...');
+//   },
+// };
 
-interface Director extends Member {
-  managePeople(): void;
-  delegateTasks(): void;
-}
+// console.log(newManager.getDetails());
+// console.log(newManager.getDogDetails());
+// console.log(newManager.managePeople());
 
-function getMember(): Member | PetOwner | Director {
-  let randomNumber = Math.random() * 1;
+// // Challenge - Interface II
+// interface Member {
+//   name: string;
+// }
 
-  if (randomNumber < 0.33) {
-    return {
-      name: 'Susan',
-    };
-  } else if (randomNumber > 0.33 && randomNumber < 0.66) {
-    return {
-      name: 'Clarke',
-      dogName: 'Boxer',
-    };
-  } else {
-    return {
-      name: 'John',
-      managePeople: () => console.log('Managing people...'),
-      delegateTasks: () => console.log('Delegating tasks...'),
-    };
-  }
-}
+// interface PetOwner extends Member {
+//   dogName: string;
+// }
 
-const user: Member | PetOwner | Director = getMember();
-console.log('user', user);
+// interface Director extends Member {
+//   managePeople(): void;
+//   delegateTasks(): void;
+// }
 
-//--- Interface - Type Predicate
-// function isUser(obj: Member | PetOwner | Director): boolean {
+// function getMember(): Member | PetOwner | Director {
+//   let randomNumber = Math.random() * 1;
+
+//   if (randomNumber < 0.33) {
+//     return {
+//       name: 'Susan',
+//     };
+//   } else if (randomNumber > 0.33 && randomNumber < 0.66) {
+//     return {
+//       name: 'Clarke',
+//       dogName: 'Boxer',
+//     };
+//   } else {
+//     return {
+//       name: 'John',
+//       managePeople: () => console.log('Managing people...'),
+//       delegateTasks: () => console.log('Delegating tasks...'),
+//     };
+//   }
+// }
+
+// const user: Member | PetOwner | Director = getMember();
+// console.log('user', user);
+
+// //--- Interface - Type Predicate
+// // function isUser(obj: Member | PetOwner | Director): boolean {
+// //   return 'managePeople' in obj;
+// // }
+// // console.log(isUser(user));
+// // Or
+// function isUser(obj: Member | PetOwner | Director): obj is Director {
 //   return 'managePeople' in obj;
 // }
-// console.log(isUser(user));
-// Or
-function isUser(obj: Member | PetOwner | Director): obj is Director {
-  return 'managePeople' in obj;
-}
-if (isUser(user)) {
-  console.log('is user', user.delegateTasks());
-}
+// if (isUser(user)) {
+//   console.log('is user', user.delegateTasks());
+// }
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Intersection Type
-type Book = { id: number; name: string; price: number };
-type DiscountedBook = Book & { discount: number }; // Or we can assign a new type for Intersection Type
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Intersection Type
+// type Book = { id: number; name: string; price: number };
+// type DiscountedBook = Book & { discount: number }; // Or we can assign a new type for Intersection Type
 
-const book1: Book = { id: 1, name: 'How to cook a dragon', price: 26 };
-const book2: Book = { id: 2, name: 'Secret life of unicorns', price: 29 };
-const discountedBook: Book & { discount: number } = {
-  // use Intersection Type with & to add more types
-  id: 6,
-  name: 'Goblins vs Gnomes: The Ultimate Guide',
-  price: 23,
-  discount: 0.15,
-};
+// const book1: Book = { id: 1, name: 'How to cook a dragon', price: 26 };
+// const book2: Book = { id: 2, name: 'Secret life of unicorns', price: 29 };
+// const discountedBook: Book & { discount: number } = {
+//   // use Intersection Type with & to add more types
+//   id: 6,
+//   name: 'Goblins vs Gnomes: The Ultimate Guide',
+//   price: 23,
+//   discount: 0.15,
+// };
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Functions
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Functions
 
-const sayHi = (name: string) => {
-  console.log(`Hello ${name}, welcome to typescript!`);
-};
-// sayHi(8); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
-sayHi('Serhat');
+// const sayHi = (name: string) => {
+//   console.log(`Hello ${name}, welcome to typescript!`);
+// };
+// // sayHi(8); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
+// sayHi('Serhat');
 
-// Function Returns
-const calculateDiscount = (price: number): number => {
-  // Return value type
-  return price * 0.9;
-};
-const finalPrice = calculateDiscount(200);
-console.log(finalPrice);
+// // Function Returns
+// const calculateDiscount = (price: number): number => {
+//   // Return value type
+//   return price * 0.9;
+// };
+// const finalPrice = calculateDiscount(200);
+// console.log(finalPrice);
 
-//---
-const addThree = (num: number): number => {
-  let anotherNumber: number = 3;
-  return num + anotherNumber;
-};
-const result = addThree(3);
-const someValue = result;
-console.log(result);
+// //---
+// const addThree = (num: number): number => {
+//   let anotherNumber: number = 3;
+//   return num + anotherNumber;
+// };
+// const result = addThree(3);
+// const someValue = result;
+// console.log(result);
 
-//--- Challenge
-const names: string[] = ['Serhat', 'Toprak', 'Züleyha', 'Melike', 'Bahar'];
-const isNameAvailable = (name: string): boolean => {
-  return names.includes(name);
-};
-const nameToCheck: string = 'Melike';
-if (isNameAvailable(nameToCheck)) {
-  console.log(`${nameToCheck} is in the list.`);
-} else {
-  console.log(`${nameToCheck} is not in the list.`);
-}
+// //--- Challenge
+// const names: string[] = ['Serhat', 'Toprak', 'Züleyha', 'Melike', 'Bahar'];
+// const isNameAvailable = (name: string): boolean => {
+//   return names.includes(name);
+// };
+// const nameToCheck: string = 'Melike';
+// if (isNameAvailable(nameToCheck)) {
+//   console.log(`${nameToCheck} is in the list.`);
+// } else {
+//   console.log(`${nameToCheck} is not in the list.`);
+// }
 
-// Optional Parameters
-const calculatePrice = (price: number, discount?: number): number => {
-  return price - (discount || 0); //NOTE - 'discount' is possibly 'undefined'. So wee need to give a fallback value like 0 in the example
-};
+// // Optional Parameters
+// const calculatePrice = (price: number, discount?: number): number => {
+//   return price - (discount || 0); //NOTE - 'discount' is possibly 'undefined'. So wee need to give a fallback value like 0 in the example
+// };
 
-let priceAfterDiscount = calculatePrice(100, 20);
-console.log(priceAfterDiscount);
+// let priceAfterDiscount = calculatePrice(100, 20);
+// console.log(priceAfterDiscount);
 
-// Default Parameters
-const calculateScore = (
-  initialScore: number,
-  penaltyPoints: number = 0
-): number => {
-  return initialScore - penaltyPoints;
-};
+// // Default Parameters
+// const calculateScore = (
+//   initialScore: number,
+//   penaltyPoints: number = 0
+// ): number => {
+//   return initialScore - penaltyPoints;
+// };
 
-let scoreAfterPenalty = calculateScore(100, 20);
-let scoreWithoutPenalty = calculateScore(200);
-console.log('scoreAfterPenalty', scoreAfterPenalty);
-console.log('scoreWithoutPenalty', scoreWithoutPenalty);
+// let scoreAfterPenalty = calculateScore(100, 20);
+// let scoreWithoutPenalty = calculateScore(200);
+// console.log('scoreAfterPenalty', scoreAfterPenalty);
+// console.log('scoreWithoutPenalty', scoreWithoutPenalty);
 
-// Rest Parameter
-const sum = (message: string, ...numbers: number[]): string => {
-  let total = numbers.reduce((prev, current) => {
-    return prev + current;
-  }, 0);
+// // Rest Parameter
+// const sum = (message: string, ...numbers: number[]): string => {
+//   let total = numbers.reduce((prev, current) => {
+//     return prev + current;
+//   }, 0);
 
-  return `${message} ${total}.`;
-};
+//   return `${message} ${total}.`;
+// };
 
-let sumResult = sum('The total is : ', 1, 2, 3, 4, 5, 6);
-console.log(sumResult);
+// let sumResult = sum('The total is : ', 1, 2, 3, 4, 5, 6);
+// console.log(sumResult);
 
-// Void Keyword
-const logMessage = (message: string) => {
-  console.log(message);
-};
-logMessage('Hello, Typescript'); // const logMessage: (message: string) => void // NOTE - Void indicates that function does not return a value
+// // Void Keyword
+// const logMessage = (message: string) => {
+//   console.log(message);
+// };
+// logMessage('Hello, Typescript'); // const logMessage: (message: string) => void // NOTE - Void indicates that function does not return a value
 
-// Challenge - ype Guards
-const processInput = (val: string | number) => {
-  if (typeof val === 'number') {
-    console.log('Multiply number by 2:', val * 2);
-  } else if (typeof val === 'string') {
-    console.log('String to uppercase:', val.toUpperCase());
-  }
-};
-processInput('cat meows a lot');
-processInput(21);
-processInput('Dog barks a lot');
-processInput(42);
+// // Challenge - ype Guards
+// const processInput = (val: string | number) => {
+//   if (typeof val === 'number') {
+//     console.log('Multiply number by 2:', val * 2);
+//   } else if (typeof val === 'string') {
+//     console.log('String to uppercase:', val.toUpperCase());
+//   }
+// };
+// processInput('cat meows a lot');
+// processInput(21);
+// processInput('Dog barks a lot');
+// processInput(42);
 
-// Objects As Parameters
-const createEmployee = ({
-  id,
-}: {
-  id: number;
-}): { id: number; isActive: boolean } => {
-  return {
-    id,
-    isActive: id % 2 === 0,
-  };
-};
-const employee = createEmployee({ id: 6 });
-const employee2 = createEmployee({ id: 9 });
-console.log(employee, employee2);
+// // Objects As Parameters
+// const createEmployee = ({
+//   id,
+// }: {
+//   id: number;
+// }): { id: number; isActive: boolean } => {
+//   return {
+//     id,
+//     isActive: id % 2 === 0,
+//   };
+// };
+// const employee = createEmployee({ id: 6 });
+// const employee2 = createEmployee({ id: 9 });
+// console.log(employee, employee2);
 
-// Challenge
-const processData = (
-  input: number | string,
-  config: { reverse: boolean } = { reverse: false }
-): number | string => {
-  if (typeof input === 'number') {
-    return input * input;
-  } else {
-    return config.reverse
-      ? input.split('').reverse().join('')
-      : input.toUpperCase();
-  }
-};
+// // Challenge
+// const processData = (
+//   input: number | string,
+//   config: { reverse: boolean } = { reverse: false }
+// ): number | string => {
+//   if (typeof input === 'number') {
+//     return input * input;
+//   } else {
+//     return config.reverse
+//       ? input.split('').reverse().join('')
+//       : input.toUpperCase();
+//   }
+// };
 
-console.log(processData(10));
-console.log(processData('Hello World'));
-console.log(processData('Hello World', { reverse: true }));
+// console.log(processData(10));
+// console.log(processData('Hello World'));
+// console.log(processData('Hello World', { reverse: true }));
 
-// Type Alias
+// // Type Alias
 
-type User = {
-  id: number;
-  name: string;
-  isActive: boolean;
-};
+// type User = {
+//   id: number;
+//   name: string;
+//   isActive: boolean;
+// };
 
-const john: User = {
-  id: 1,
-  name: 'john',
-  isActive: true,
-};
-const susan: User = {
-  id: 1,
-  name: 'susan',
-  isActive: false,
-};
+// const john: User = {
+//   id: 1,
+//   name: 'john',
+//   isActive: true,
+// };
+// const susan: User = {
+//   id: 1,
+//   name: 'susan',
+//   isActive: false,
+// };
 
-function createUser(user: User): User {
-  console.log(`Hello there ${user.name.toUpperCase()} !!!`);
+// function createUser(user: User): User {
+//   console.log(`Hello there ${user.name.toUpperCase()} !!!`);
 
-  return user;
-}
+//   return user;
+// }
 
-createUser(john);
-createUser(susan);
-createUser({ id: 6, name: 'Serhat', isActive: true });
+// createUser(john);
+// createUser(susan);
+// createUser({ id: 6, name: 'Serhat', isActive: true });
 
-// Challenge
-type Employee = {
-  id: number;
-  name: string;
-  department: string;
-};
+// // Challenge
+// type Employee = {
+//   id: number;
+//   name: string;
+//   department: string;
+// };
 
-type Manager = {
-  id: number;
-  name: string;
-  employees: Employee[];
-};
+// type Manager = {
+//   id: number;
+//   name: string;
+//   employees: Employee[];
+// };
 
-type Stuff = Manager | Employee;
+// type Stuff = Manager | Employee;
 
-const alice: Employee = {
-  id: 6,
-  name: 'Alice',
-  department: 'Frontend Development',
-};
-const steve: Employee = {
-  id: 9,
-  name: 'Steve',
-  department: 'UX Design',
-};
-const bob: Manager = {
-  id: 3,
-  name: 'Bob',
-  employees: [alice, steve],
-};
+// const alice: Employee = {
+//   id: 6,
+//   name: 'Alice',
+//   department: 'Frontend Development',
+// };
+// const steve: Employee = {
+//   id: 9,
+//   name: 'Steve',
+//   department: 'UX Design',
+// };
+// const bob: Manager = {
+//   id: 3,
+//   name: 'Bob',
+//   employees: [alice, steve],
+// };
 
-const printStuffDetails = (stuff: Stuff): void => {
-  if ('employees' in stuff) {
-    console.log(
-      `${stuff.name} is a manager and has ${stuff.employees.length} employees.`
-    );
-  } else {
-    console.log(
-      `${stuff.name} is an employee and in ${stuff.department} department.`
-    );
-  }
-};
+// const printStuffDetails = (stuff: Stuff): void => {
+//   if ('employees' in stuff) {
+//     console.log(
+//       `${stuff.name} is a manager and has ${stuff.employees.length} employees.`
+//     );
+//   } else {
+//     console.log(
+//       `${stuff.name} is an employee and in ${stuff.department} department.`
+//     );
+//   }
+// };
 
-printStuffDetails(bob);
-printStuffDetails(alice);
-printStuffDetails(steve);
+// printStuffDetails(bob);
+// printStuffDetails(alice);
+// printStuffDetails(steve);
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Objects
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Objects
 
-let book = { title: 'book', cost: 20 };
-let pen = { title: 'pen', cost: 18 };
-let notebook = { title: 'notebook' };
+// let book = { title: 'book', cost: 20 };
+// let pen = { title: 'pen', cost: 18 };
+// let notebook = { title: 'notebook' };
 
-// let items: { title: string; cost: number }[] = [book, pen, notebook]; //NOTE - Property 'cost' is missing in type '{ title: string; }' but required in type '{ title: string; cost: number; }'.ts(2741)
-let deskItems: { title: string; cost?: number }[] = [book, pen, notebook];
-console.log(deskItems);
+// // let items: { title: string; cost: number }[] = [book, pen, notebook]; //NOTE - Property 'cost' is missing in type '{ title: string; }' but required in type '{ title: string; cost: number; }'.ts(2741)
+// let deskItems: { title: string; cost?: number }[] = [book, pen, notebook];
+// console.log(deskItems);
 
-let bike: { brand: string; year: number } = { brand: 'climax', year: 2014 };
-// bike.year = '2014' //NOTE - Type 'string' is not assignable to type 'number'.
-let laptop: { brand: string; year: number } = { brand: 'MSI', year: 2024 };
-// let laptop2: {brand:string; year:number} = {brand:'MAC'}  // Property 'year' is missing in type '{ brand: string; }' but required in type '{ brand: string; year: number; }'.ts(2741)
-let products: { title: string; price?: number }[] = [
-  { title: 'phone', price: 44 },
-  { title: 'tv' },
-];
-console.log(products);
+// let bike: { brand: string; year: number } = { brand: 'climax', year: 2014 };
+// // bike.year = '2014' //NOTE - Type 'string' is not assignable to type 'number'.
+// let laptop: { brand: string; year: number } = { brand: 'MSI', year: 2024 };
+// // let laptop2: {brand:string; year:number} = {brand:'MAC'}  // Property 'year' is missing in type '{ brand: string; }' but required in type '{ brand: string; year: number; }'.ts(2741)
+// let products: { title: string; price?: number }[] = [
+//   { title: 'phone', price: 44 },
+//   { title: 'tv' },
+// ];
+// console.log(products);
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Arrays
-let temperatures: number[] = [20, 18, 41];
-temperatures.push(38);
-// temperatures.push('36'); // NOTE -Argument of type 'string' is not assignable to parameter of type 'number'.
-console.log(temperatures);
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Arrays
+// let temperatures: number[] = [20, 18, 41];
+// temperatures.push(38);
+// // temperatures.push('36'); // NOTE -Argument of type 'string' is not assignable to parameter of type 'number'.
+// console.log(temperatures);
 
-let colors: string[] = ['yellow', 'blue', 'red'];
-// colors.push(20); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.
-colors.push('green');
-console.log(colors);
+// let colors: string[] = ['yellow', 'blue', 'red'];
+// // colors.push(20); // NOTE - Argument of type 'number' is not assignable to parameter of type 'string'.
+// colors.push('green');
+// console.log(colors);
 
-let mixedArray: (string | number)[] = ['apple', 6, 'banana', 8];
-// mixedArray.push(true); // NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
-mixedArray.push('cat');
-console.log(mixedArray);
+// let mixedArray: (string | number)[] = ['apple', 6, 'banana', 8];
+// // mixedArray.push(true); // NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+// mixedArray.push('cat');
+// console.log(mixedArray);
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Challenge - Union Type
-let orderStatus: 'shipped' | 'delivered' | 'processing' = 'processing';
-orderStatus = 'delivered';
-orderStatus = 'shipped';
-// orderStatus = 'cancelled'; // Type '"cancelled"' is not assignable to type '"shipped" | "delivered" | "processing"'.
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Challenge - Union Type
+// let orderStatus: 'shipped' | 'delivered' | 'processing' = 'processing';
+// orderStatus = 'delivered';
+// orderStatus = 'shipped';
+// // orderStatus = 'cancelled'; // Type '"cancelled"' is not assignable to type '"shipped" | "delivered" | "processing"'.
 
-let discount: string | number = 20;
-discount = '20%';
-// discount = true; // Type 'boolean' is not assignable to type 'string | number'.
+// let discount: string | number = 20;
+// discount = '20%';
+// // discount = true; // Type 'boolean' is not assignable to type 'string | number'.
 
-console.log('union type 🩷🩷🩷', orderStatus, discount);
+// console.log('union type 🩷🩷🩷', orderStatus, discount);
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Example
-const books = ['1984', 'Brave New World', 'Fahrenheit 451'];
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Example
+// const books = ['1984', 'Brave New World', 'Fahrenheit 451'];
 
-let foundBook: string | undefined;
+// let foundBook: string | undefined;
 
-for (const book of books) {
-  if (book === '1984') {
-    foundBook = book;
-    foundBook = foundBook.toUpperCase();
-    break;
-  }
-}
+// for (const book of books) {
+//   if (book === '1984') {
+//     foundBook = book;
+//     foundBook = foundBook.toUpperCase();
+//     break;
+//   }
+// }
 
-console.log('foundBook 🩷🩷🩷', foundBook);
-console.log('foundBook 🩷🩷🩷', foundBook?.length);
+// console.log('foundBook 🩷🩷🩷', foundBook);
+// console.log('foundBook 🩷🩷🩷', foundBook?.length);
 
-/* -------------------------------------------------------------------------- */
-// SECTION - Type : Any
+// /* -------------------------------------------------------------------------- */
+// // SECTION - Type : Any
 
-let notSure: any = 4;
+// let notSure: any = 4;
 
-notSure = (name: string) => {
-  return name;
-};
+// notSure = (name: string) => {
+//   return name;
+// };
 
-console.log(notSure('Bedirhan'));
+// console.log(notSure('Bedirhan'));
 
-/* -------------------------------------------------------------------------- */
-//SECTION - Union Type
+// /* -------------------------------------------------------------------------- */
+// //SECTION - Union Type
 
-let tax: number | string = 20;
-tax = '6';
+// let tax: number | string = 20;
+// tax = '6';
 
-console.log(tax);
-let requestStatus: 'pending' | 'error' | 'success' = 'pending';
+// console.log(tax);
+// let requestStatus: 'pending' | 'error' | 'success' = 'pending';
 
-requestStatus = 'error';
-requestStatus = 'success';
-// requestStatus = 'random';  // Type '"random"' is not assignable to type '"pending" | "error" | "success"'.
+// requestStatus = 'error';
+// requestStatus = 'success';
+// // requestStatus = 'random';  // Type '"random"' is not assignable to type '"pending" | "error" | "success"'.
 
-console.log(requestStatus);
+// console.log(requestStatus);
 
-/* -------------------------------------------------------------------------- */
+// /* -------------------------------------------------------------------------- */
 
-//SECTION - Type Annotations
+// //SECTION - Type Annotations
 
-let animal: string = 'Cat';
-animal.concat(', loves milk.');
+// let animal: string = 'Cat';
+// animal.concat(', loves milk.');
 
-let water: boolean = true;
-water.valueOf();
+// let water: boolean = true;
+// water.valueOf();
 
-let num: number = 6;
-num.toExponential();
+// let num: number = 6;
+// num.toExponential();
 
-console.log(animal);
-console.log(water);
-console.log(num);
+// console.log(animal);
+// console.log(water);
+// console.log(num);
