@@ -1,23 +1,52 @@
 // /* -------------------------------------------------------------------------- */
-// //SECTION - Enum / Reverse Mapping
+//SECTION - Challenge - Tuple and Enum
 
-enum Days {
-  Monday = 1,
-  Tuesday = 2,
-  Wednesday = 3,
-  Thursday = 4,
-  Friday = 5,
-  Saturday = 6,
-  Sunday = 7,
+enum UserRole {
+  Admin,
+  Manager,
+  Employee,
 }
 
-console.log(Days);
-Object.values(Days).forEach((val) => {
-  if (typeof val === 'number') {
-    console.log(val);
-  }
+type User = {
+  id: number;
+  name: string;
+  role: UserRole;
+  contact: [string, string];
+};
+
+const createUser = (user: User): User => {
+  return user;
+};
+
+const user: User = createUser({
+  id: 1,
+  name: 'John',
+  role: UserRole.Admin,
+  contact: ['ggg@gmail.com', '0555-555-55-55'],
 });
-console.log('Turn days values into an array', Object.values(Days));
+console.log('user', user);
+
+// /* -------------------------------------------------------------------------- */
+//SECTION - Enum / Reverse Mapping
+// NOTE - Enums in TypeScript allow you to define a set of named constants.
+
+// enum Days {
+//   Monday = 1,
+//   Tuesday = 2,
+//   Wednesday = 3,
+//   Thursday = 4,
+//   Friday = 5,
+//   Saturday = 6,
+//   Sunday = 7,
+// }
+
+// console.log(Days);
+// Object.values(Days).forEach((val) => {
+//   if (typeof val === 'number') {
+//     console.log(val);
+//   }
+// });
+// console.log('Turn days values into an array', Object.values(Days));
 
 // /* -------------------------------------------------------------------------- */
 // //SECTION - Enum
