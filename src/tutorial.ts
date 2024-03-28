@@ -1,30 +1,70 @@
 // /* -------------------------------------------------------------------------- */
-//SECTION - Challenge - Tuple and Enum
+//SECTION - Type Assertion
+let someValue: any = 'Some Value string';
+let strLength: number = (someValue as string).length; // NOTE -  We use type assertion when we know more about type than the typescript.
+console.log('strLength', strLength);
 
-enum UserRole {
-  Admin,
-  Manager,
-  Employee,
+type Bird = {
+  name: string;
+};
+
+let birdString = '{"name":"Eagle"}';
+let dogString = '{"breed":"Poodle"}';
+
+let birdObj = JSON.parse(birdString);
+let dogObj = JSON.parse(dogString);
+
+let bird = birdObj as Bird;
+let dog = dogObj as Bird;
+
+console.log('bird', bird);
+console.log('dog', dog);
+
+//----
+enum Status {
+  Pending = 'pending',
+  Declined = 'declined',
 }
 
 type User = {
-  id: number;
   name: string;
-  role: UserRole;
-  contact: [string, string];
+  status: Status;
 };
 
-const createUser = (user: User): User => {
-  return user;
-};
+// save Status.Pending in the DB as a string
+// retrieve string from the DB
+const statusValue = 'pending';
+const user: User = { name: 'Neo', status: statusValue as Status };
 
-const user: User = createUser({
-  id: 1,
-  name: 'John',
-  role: UserRole.Admin,
-  contact: ['ggg@gmail.com', '0555-555-55-55'],
-});
 console.log('user', user);
+
+// /* -------------------------------------------------------------------------- */
+//SECTION - Challenge - Tuple and Enum
+
+// enum UserRole {
+//   Admin,
+//   Manager,
+//   Employee,
+// }
+
+// type User = {
+//   id: number;
+//   name: string;
+//   role: UserRole;
+//   contact: [string, string];
+// };
+
+// const createUser = (user: User): User => {
+//   return user;
+// };
+
+// const user: User = createUser({
+//   id: 1,
+//   name: 'John',
+//   role: UserRole.Admin,
+//   contact: ['ggg@gmail.com', '0555-555-55-55'],
+// });
+// console.log('user', user);
 
 // /* -------------------------------------------------------------------------- */
 //SECTION - Enum / Reverse Mapping
