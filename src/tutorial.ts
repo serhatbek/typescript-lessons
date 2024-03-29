@@ -1,42 +1,81 @@
 // /* -------------------------------------------------------------------------- */
-//SECTION - Type Assertion
-let someValue: any = 'Some Value string';
-let strLength: number = (someValue as string).length; // NOTE -  We use type assertion when we know more about type than the typescript.
-console.log('strLength', strLength);
+//SECTION - Type - UnknownType Assertion
+let unKnownValue: unknown;
+unKnownValue = 'hello world';
+unKnownValue = [1, 2, 3, 4];
+unKnownValue = 43.4355675756;
 
-type Bird = {
-  name: string;
-};
-
-let birdString = '{"name":"Eagle"}';
-let dogString = '{"breed":"Poodle"}';
-
-let birdObj = JSON.parse(birdString);
-let dogObj = JSON.parse(dogString);
-
-let bird = birdObj as Bird;
-let dog = dogObj as Bird;
-
-console.log('bird', bird);
-console.log('dog', dog);
-
-//----
-enum Status {
-  Pending = 'pending',
-  Declined = 'declined',
+if (typeof unKnownValue === 'string') {
+  console.log('string', unKnownValue);
 }
 
-type User = {
-  name: string;
-  status: Status;
+if (typeof unKnownValue === 'number') {
+  let newVal = Number(unKnownValue.toFixed(2));
+  console.log('number', newVal);
+}
+
+if (Array.isArray(unKnownValue)) {
+  unKnownValue?.forEach((item: number) => console.log('array item', item));
+}
+
+const runSomeCode = () => {
+  const random = Math.random();
+  if (random < 0.5) {
+    throw new Error('there was an error on random num...');
+  } else {
+    throw 'some error';
+  }
 };
+
+try {
+  runSomeCode();
+} catch (error) {
+  if (error instanceof Error) {
+    console.log(error.message);
+  } else {
+    console.log(error);
+  }
+}
+
+// /* -------------------------------------------------------------------------- */
+//SECTION - Type Assertion
+// let someValue: any = 'Some Value string';
+// let strLength: number = (someValue as string).length; // NOTE -  We use type assertion when we know more about type than the typescript.
+// console.log('strLength', strLength);
+
+// type Bird = {
+//   name: string;
+// };
+
+// let birdString = '{"name":"Eagle"}';
+// let dogString = '{"breed":"Poodle"}';
+
+// let birdObj = JSON.parse(birdString);
+// let dogObj = JSON.parse(dogString);
+
+// let bird = birdObj as Bird;
+// let dog = dogObj as Bird;
+
+// console.log('bird', bird);
+// console.log('dog', dog);
+
+// //----
+// enum Status {
+//   Pending = 'pending',
+//   Declined = 'declined',
+// }
+
+// type User = {
+//   name: string;
+//   status: Status;
+// };
 
 // save Status.Pending in the DB as a string
 // retrieve string from the DB
-const statusValue = 'pending';
-const user: User = { name: 'Neo', status: statusValue as Status };
+// const statusValue = 'pending';
+// const user: User = { name: 'Neo', status: statusValue as Status };
 
-console.log('user', user);
+// console.log('user', user);
 
 // /* -------------------------------------------------------------------------- */
 //SECTION - Challenge - Tuple and Enum
