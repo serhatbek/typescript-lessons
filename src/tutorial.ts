@@ -1,41 +1,101 @@
 // /* -------------------------------------------------------------------------- */
-//SECTION - Type - UnknownType Assertion
-let unKnownValue: unknown;
-unKnownValue = 'hello world';
-unKnownValue = [1, 2, 3, 4];
-unKnownValue = 43.4355675756;
+// SECTION -
+/* -------------------------------------------------------------------------- */
 
-if (typeof unKnownValue === 'string') {
-  console.log('string', unKnownValue);
-}
+// /* -------------------------------------------------------------------------- */
+// SECTION - Type - Never
+// NOTE - In TypeScript, never is a type that represents the type of values that never occur.you can't assign any value to a variable of type never.
+// let someValue: never = 0;
 
-if (typeof unKnownValue === 'number') {
-  let newVal = Number(unKnownValue.toFixed(2));
-  console.log('number', newVal);
-}
+// NOTE - TypeScript will give a compile error if there are any unhandled cases, helping ensure that all cases are handled.
 
-if (Array.isArray(unKnownValue)) {
-  unKnownValue?.forEach((item: number) => console.log('array item', item));
-}
+type Theme = 'light' | 'dark';
 
-const runSomeCode = () => {
-  const random = Math.random();
-  if (random < 0.5) {
-    throw new Error('there was an error on random num...');
-  } else {
-    throw 'some error';
+const checkTheme = (theme: Theme): void => {
+  if (theme == 'light') {
+    console.log('light theme');
+    return;
   }
+  if (theme == 'dark') {
+    console.log('dark theme');
+    return;
+  }
+  //   theme // NOTE - (parameter) theme: never
 };
 
-try {
-  runSomeCode();
-} catch (error) {
-  if (error instanceof Error) {
-    console.log(error.message);
-  } else {
-    console.log(error);
-  }
+checkTheme('light');
+
+enum Color {
+  Red,
+  Blue,
+  Green,
 }
+
+const getColorName = (colorName: Color) => {
+  switch (colorName) {
+    case Color.Red:
+      return 'Red';
+
+    case Color.Blue:
+      return 'Blue';
+
+    case Color.Green:
+      return 'Green';
+
+    default:
+      // at build time
+      let unexpectedColor: never = colorName;
+      // at runtime
+      throw new Error(`Unexpected color value: ${colorName}`);
+  }
+};
+console.log(getColorName(Color.Red));
+console.log(getColorName(Color.Blue));
+console.log(getColorName(Color.Green));
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
+// SECTION - Type - UnknownType Assertion
+// NOTE - The unknown type in TypeScript is a type-safe counterpart of the any type.
+// NOTE - It's like saying that a variable could be anything, but we need to perform some type-checking before we can use it.
+// let unKnownValue: unknown;
+// unKnownValue = 'hello world';
+// unKnownValue = [1, 2, 3, 4];
+// unKnownValue = 43.4355675756;
+
+// if (typeof unKnownValue === 'string') {
+//   console.log('string', unKnownValue);
+// }
+
+// if (typeof unKnownValue === 'number') {
+//   let newVal = Number(unKnownValue.toFixed(2));
+//   console.log('number', newVal);
+// }
+
+// if (Array.isArray(unKnownValue)) {
+//   unKnownValue?.forEach((item: number) => console.log('array item', item));
+// }
+
+// const runSomeCode = () => {
+//   const random = Math.random();
+//   if (random < 0.5) {
+//     throw new Error('there was an error on random num...');
+//   } else {
+//     throw 'some error';
+//   }
+// };
+
+// try {
+//   runSomeCode();
+// } catch (error) {
+//   if (error instanceof Error) {
+//     console.log(error.message);
+//   } else {
+//     console.log(error);
+//   }
+// }
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 //SECTION - Type Assertion
@@ -76,6 +136,7 @@ try {
 // const user: User = { name: 'Neo', status: statusValue as Status };
 
 // console.log('user', user);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 //SECTION - Challenge - Tuple and Enum
@@ -104,6 +165,7 @@ try {
 //   contact: ['ggg@gmail.com', '0555-555-55-55'],
 // });
 // console.log('user', user);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 //SECTION - Enum / Reverse Mapping
@@ -126,6 +188,7 @@ try {
 //   }
 // });
 // console.log('Turn days values into an array', Object.values(Days));
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // //SECTION - Enum
@@ -148,6 +211,7 @@ try {
 // };
 // const response: ServerResponse = getServerResponse();
 // console.log(response);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // //SECTION - Tuple
@@ -166,6 +230,7 @@ try {
 
 // // We can use optional parameter
 // let adam: [string, number?] = ['Eve'];
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // NOTE - Type alias can also be used with primitive and literal type too.
@@ -339,6 +404,7 @@ try {
 // if (isUser(user)) {
 //   console.log('is user', user.delegateTasks());
 // }
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Intersection Type
@@ -354,6 +420,7 @@ try {
 //   price: 23,
 //   discount: 0.15,
 // };
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Functions
@@ -553,6 +620,7 @@ try {
 // printStuffDetails(bob);
 // printStuffDetails(alice);
 // printStuffDetails(steve);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Objects
@@ -574,6 +642,7 @@ try {
 //   { title: 'tv' },
 // ];
 // console.log(products);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Arrays
@@ -591,6 +660,7 @@ try {
 // // mixedArray.push(true); // NOTE - Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
 // mixedArray.push('cat');
 // console.log(mixedArray);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Challenge - Union Type
@@ -604,6 +674,7 @@ try {
 // // discount = true; // Type 'boolean' is not assignable to type 'string | number'.
 
 // console.log('union type 🩷🩷🩷', orderStatus, discount);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Example
@@ -621,6 +692,7 @@ try {
 
 // console.log('foundBook 🩷🩷🩷', foundBook);
 // console.log('foundBook 🩷🩷🩷', foundBook?.length);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // // SECTION - Type : Any
@@ -632,6 +704,7 @@ try {
 // };
 
 // console.log(notSure('Bedirhan'));
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 // //SECTION - Union Type
@@ -647,6 +720,7 @@ try {
 // // requestStatus = 'random';  // Type '"random"' is not assignable to type '"pending" | "error" | "success"'.
 
 // console.log(requestStatus);
+/* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
 
@@ -664,3 +738,4 @@ try {
 // console.log(animal);
 // console.log(water);
 // console.log(num);
+/* -------------------------------------------------------------------------- */
