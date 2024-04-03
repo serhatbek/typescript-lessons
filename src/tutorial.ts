@@ -3,40 +3,60 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
-// SECTION - Type Guards - Equality and "in"
-// NOTE - In TypeScript, equality narrowing is a form of type narrowing that occurs when you use equality checks like === or !== in your code
+// SECTION - Type Guards - Truthy and Falsy
+// NOTE - In TypeScript, "Truthy"/"Falsy" guard is a simple check for a truthy or falsy value
 
-type Dog = {
-  type: 'dog';
-  name: string;
-  bark: () => void;
-};
-type Cat = {
-  type: 'cat';
-  name: string;
-  meow: () => void;
-};
-type Animal = Dog | Cat;
-
-const dog: Dog = {
-  type: 'dog',
-  name: 'Rex',
-  //   bark: () => console.log(`Hello ${this.name}`),
-  // NOTE - arrow function captures the global value of 'this'
-  bark: function () {
-    console.log(`Hello ${this.name}`);
-  },
-};
-
-const makeSound = (animal: Animal) => {
-  if ('bark' in animal) {
-    animal.bark();
+const printLength = (str: string | null | undefined) => {
+  if (str) {
+    console.log(str.length);
   } else {
-    animal.meow();
+    console.log('No string provided');
   }
 };
 
-makeSound(dog);
+printLength('Hello'); // Outputs: 5
+printLength(null); // Outputs: No string provided
+printLength(undefined); // Outputs: No string provided
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
+// SECTION - Type Guards - Equality and "in"
+// NOTE - In TypeScript, equality narrowing is a form of type narrowing that occurs when you use equality checks like === or !== in your code
+// NOTE - The "in" operator in TypeScript is used to narrow down the type of a variable when used in a conditional statement.
+// NOTE - It checks if a property or method exists on an object. If it exists, TypeScript will narrow the type to the one that has this property.
+
+// type Dog = {
+//   type: 'dog';
+//   name: string;
+//   bark: () => void;
+// };
+// type Cat = {
+//   type: 'cat';
+//   name: string;
+//   meow: () => void;
+// };
+// type Animal = Dog | Cat;
+
+// const dog: Dog = {
+//   type: 'dog',
+//   name: 'Rex',
+//   //   bark: () => console.log(`Hello ${this.name}`),
+//   // NOTE - arrow function captures the global value of 'this'
+//   bark: function () {
+//     console.log(`Hello ${this.name}`);
+//   },
+// };
+
+// const makeSound = (animal: Animal) => {
+//   if ('bark' in animal) {
+//     animal.bark();
+//   } else {
+//     animal.meow();
+//   }
+// };
+
+// makeSound(dog);
 
 // *** OR ***
 
