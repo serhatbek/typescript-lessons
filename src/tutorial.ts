@@ -3,34 +3,85 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
-// SECTION - Type Guards - Typeof
-type ValueType = string | number | boolean;
+// SECTION - Type Guards - Equality and "in"
+// NOTE - In TypeScript, equality narrowing is a form of type narrowing that occurs when you use equality checks like === or !== in your code
 
-let value: ValueType;
-const random = Math.random();
-value = random < 0.33 ? 'Hello' : random < 0.66 ? 234.3454545 : true;
+type Dog = {
+  type: 'dog';
+  name: string;
+  bark: () => void;
+};
+type Cat = {
+  type: 'cat';
+  name: string;
+  meow: () => void;
+};
+type Animal = Dog | Cat;
 
-const checkValue = (value: ValueType): void => {
-  if (typeof value === 'string') {
-    console.log(value.toLowerCase());
-    return;
-  }
+const dog: Dog = {
+  type: 'dog',
+  name: 'Rex',
+  //   bark: () => console.log(`Hello ${this.name}`),
+  // NOTE - arrow function captures the global value of 'this'
+  bark: function () {
+    console.log(`Hello ${this.name}`);
+  },
+};
 
-  if (typeof value === 'number') {
-    console.log(value.toFixed(2));
-    return;
-  }
-
-  if (typeof value === 'boolean') {
-    console.log(`boolean: ${value}`);
-    return;
+const makeSound = (animal: Animal) => {
+  if ('bark' in animal) {
+    animal.bark();
+  } else {
+    animal.meow();
   }
 };
 
-checkValue(value);
-checkValue('miranda');
-checkValue(334);
-checkValue(false);
+makeSound(dog);
+
+// *** OR ***
+
+// const makeSound = (animal: Animal) => {
+//   if (animal.type === 'dog') {
+//     animal.bark();
+//   }
+//   if (animal.type === 'cat') {
+//     animal.meow();
+//   }
+// };
+
+// makeSound(dog);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
+// SECTION - Type Guards - Typeof
+// type ValueType = string | number | boolean;
+
+// let value: ValueType;
+// const random = Math.random();
+// value = random < 0.33 ? 'Hello' : random < 0.66 ? 234.3454545 : true;
+
+// const checkValue = (value: ValueType): void => {
+//   if (typeof value === 'string') {
+//     console.log(value.toLowerCase());
+//     return;
+//   }
+
+//   if (typeof value === 'number') {
+//     console.log(value.toFixed(2));
+//     return;
+//   }
+
+//   if (typeof value === 'boolean') {
+//     console.log(`boolean: ${value}`);
+//     return;
+//   }
+// };
+
+// checkValue(value);
+// checkValue('miranda');
+// checkValue(334);
+// checkValue(false);
 
 /* -------------------------------------------------------------------------- */
 
