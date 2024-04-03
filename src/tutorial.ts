@@ -3,55 +3,73 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Modules
+// NOTE - If your TypeScript files aren't modules (i.e., they don't have any import or export statements), they're treated as scripts in the global scope.
+// NOTE - In this case, declaring the same variable in two different files would cause a conflict.
+
+import newStudent, { person, sayHello, type Student } from './actions';
+
+sayHello('Typescript');
+sayHello(person);
+
+const anotherStudent: Student = {
+  name: 'Bob',
+  age: 28,
+};
+console.log(anotherStudent);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Type - Never
 // NOTE - In TypeScript, never is a type that represents the type of values that never occur.you can't assign any value to a variable of type never.
 // let someValue: never = 0;
 
 // NOTE - TypeScript will give a compile error if there are any unhandled cases, helping ensure that all cases are handled.
 
-type Theme = 'light' | 'dark';
+// type Theme = 'light' | 'dark';
 
-const checkTheme = (theme: Theme): void => {
-  if (theme == 'light') {
-    console.log('light theme');
-    return;
-  }
-  if (theme == 'dark') {
-    console.log('dark theme');
-    return;
-  }
-  //   theme // NOTE - (parameter) theme: never
-};
+// const checkTheme = (theme: Theme): void => {
+//   if (theme == 'light') {
+//     console.log('light theme');
+//     return;
+//   }
+//   if (theme == 'dark') {
+//     console.log('dark theme');
+//     return;
+//   }
+//   //   theme // NOTE - (parameter) theme: never
+// };
 
-checkTheme('light');
+// checkTheme('light');
 
-enum Color {
-  Red,
-  Blue,
-  Green,
-}
+// enum Color {
+//   Red,
+//   Blue,
+//   Green,
+// }
 
-const getColorName = (colorName: Color) => {
-  switch (colorName) {
-    case Color.Red:
-      return 'Red';
+// const getColorName = (colorName: Color) => {
+//   switch (colorName) {
+//     case Color.Red:
+//       return 'Red';
 
-    case Color.Blue:
-      return 'Blue';
+//     case Color.Blue:
+//       return 'Blue';
 
-    case Color.Green:
-      return 'Green';
+//     case Color.Green:
+//       return 'Green';
 
-    default:
-      // at build time
-      let unexpectedColor: never = colorName;
-      // at runtime
-      throw new Error(`Unexpected color value: ${colorName}`);
-  }
-};
-console.log(getColorName(Color.Red));
-console.log(getColorName(Color.Blue));
-console.log(getColorName(Color.Green));
+//     default:
+//       // at build time
+//       let unexpectedColor: never = colorName;
+//       // at runtime
+//       throw new Error(`Unexpected color value: ${colorName}`);
+//   }
+// };
+// console.log(getColorName(Color.Red));
+// console.log(getColorName(Color.Blue));
+// console.log(getColorName(Color.Green));
 
 /* -------------------------------------------------------------------------- */
 
