@@ -3,20 +3,52 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Type Guards - Typeof
+type ValueType = string | number | boolean;
+
+let value: ValueType;
+const random = Math.random();
+value = random < 0.33 ? 'Hello' : random < 0.66 ? 234.3454545 : true;
+
+const checkValue = (value: ValueType): void => {
+  if (typeof value === 'string') {
+    console.log(value.toLowerCase());
+    return;
+  }
+
+  if (typeof value === 'number') {
+    console.log(value.toFixed(2));
+    return;
+  }
+
+  if (typeof value === 'boolean') {
+    console.log(`boolean: ${value}`);
+    return;
+  }
+};
+
+checkValue(value);
+checkValue('miranda');
+checkValue(334);
+checkValue(false);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Modules
 // NOTE - If your TypeScript files aren't modules (i.e., they don't have any import or export statements), they're treated as scripts in the global scope.
 // NOTE - In this case, declaring the same variable in two different files would cause a conflict.
 
-import newStudent, { person, sayHello, type Student } from './actions';
+// import newStudent, { person, sayHello, type Student } from './actions';
 
-sayHello('Typescript');
-sayHello(person);
+// sayHello('Typescript');
+// sayHello(person);
 
-const anotherStudent: Student = {
-  name: 'Bob',
-  age: 28,
-};
-console.log(anotherStudent);
+// const anotherStudent: Student = {
+//   name: 'Bob',
+//   age: 28,
+// };
+// console.log(anotherStudent);
 
 /* -------------------------------------------------------------------------- */
 
