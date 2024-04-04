@@ -3,6 +3,44 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Challenge - Type Predicate
+//NOTE - A type predicate is a function whose return type is a special kind of type that can be used to narrow down types within conditional blocks.
+
+type Student = {
+  name: string;
+  study: () => void;
+};
+
+type User = {
+  name: string;
+  login: () => void;
+};
+
+type Person = Student | User;
+
+const randomPerson = (): Person => {
+  return Math.random() > 0.5
+    ? { name: 'Sally', study: () => console.log('Study Coding...') }
+    : { name: 'Bob', login: () => console.log('Logged In...') };
+};
+
+const person = randomPerson();
+// console.log(person);
+
+const isStudent = (person: Person): person is Student => {
+  //   return 'study' in person;
+  return (person as Student).study !== undefined;
+};
+
+if (isStudent(person)) {
+  person.study();
+} else {
+  person.login();
+}
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Type Guards - Instanceof
 //NOTE - The instanceof type guard is a way in TypeScript to check the specific class or constructor function of an object at runtime.
 //NOTE - It returns true if the object is an instance of the class or created by the constructor function, and false otherwise.
@@ -18,17 +56,17 @@
 //   }
 // }
 
-const checkInput = (input: Date | string): string => {
-  if (input instanceof Date) {
-    return input.getFullYear().toString();
-  }
-  return input;
-};
+// const checkInput = (input: Date | string): string => {
+//   if (input instanceof Date) {
+//     return input.getFullYear().toString();
+//   }
+//   return input;
+// };
 
-const year = checkInput(new Date());
-const random = checkInput('28-08-1985');
-console.log('year:', year);
-console.log('random:', random);
+// const year = checkInput(new Date());
+// const random = checkInput('28-08-1985');
+// console.log('year:', year);
+// console.log('random:', random);
 
 /* -------------------------------------------------------------------------- */
 
