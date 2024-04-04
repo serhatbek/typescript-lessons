@@ -3,20 +3,50 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Type Guards - Instanceof
+//NOTE - The instanceof type guard is a way in TypeScript to check the specific class or constructor function of an object at runtime.
+//NOTE - It returns true if the object is an instance of the class or created by the constructor function, and false otherwise.
+
+// try {
+//   throw 'some error';
+//   //   throw new Error('This is a new error');
+// } catch (error) {
+//   if (error instanceof Error) {
+//     console.log(`Caught an error : ${error.message}`);
+//   } else {
+//     console.log('There was an unknown error...');
+//   }
+// }
+
+const checkInput = (input: Date | string): string => {
+  if (input instanceof Date) {
+    return input.getFullYear().toString();
+  }
+  return input;
+};
+
+const year = checkInput(new Date());
+const random = checkInput('28-08-1985');
+console.log('year:', year);
+console.log('random:', random);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Type Guards - Truthy and Falsy
 // NOTE - In TypeScript, "Truthy"/"Falsy" guard is a simple check for a truthy or falsy value
 
-const printLength = (str: string | null | undefined) => {
-  if (str) {
-    console.log(str.length);
-  } else {
-    console.log('No string provided');
-  }
-};
+// const printLength = (str: string | null | undefined) => {
+//   if (str) {
+//     console.log(str.length);
+//   } else {
+//     console.log('No string provided');
+//   }
+// };
 
-printLength('Hello'); // Outputs: 5
-printLength(null); // Outputs: No string provided
-printLength(undefined); // Outputs: No string provided
+// printLength('Hello'); // Outputs: 5
+// printLength(null); // Outputs: No string provided
+// printLength(undefined); // Outputs: No string provided
 
 /* -------------------------------------------------------------------------- */
 
