@@ -3,40 +3,86 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Type Guards - Discriminated Unions
+//NOTE - A discriminated union in TypeScript is a type that can be one of several different types,
+//NOTE -  each identified by a unique literal property (the discriminator), allowing for type-safe handling of each possible variant.
+
+type IncrementAction = {
+  type: 'increment';
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type DecrementAction = {
+  type: 'decrement';
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type Action = IncrementAction | DecrementAction;
+
+const reducer = (state: number, action: Action) => {
+  switch (action.type) {
+    case 'increment':
+      return state + action.amount;
+
+    case 'decrement':
+      return state - action.amount;
+
+    default:
+      const unexpectedAction: never = action;
+      throw new Error(`${unexpectedAction}`);
+  }
+};
+
+const newState = reducer(6, {
+  type: 'increment',
+  user: 'molly',
+  amount: 5,
+  timestamp: 345456,
+});
+
+console.log(newState);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Challenge - Type Predicate
 //NOTE - A type predicate is a function whose return type is a special kind of type that can be used to narrow down types within conditional blocks.
 
-type Student = {
-  name: string;
-  study: () => void;
-};
+// type Student = {
+//   name: string;
+//   study: () => void;
+// };
 
-type User = {
-  name: string;
-  login: () => void;
-};
+// type User = {
+//   name: string;
+//   login: () => void;
+// };
 
-type Person = Student | User;
+// type Person = Student | User;
 
-const randomPerson = (): Person => {
-  return Math.random() > 0.5
-    ? { name: 'Sally', study: () => console.log('Study Coding...') }
-    : { name: 'Bob', login: () => console.log('Logged In...') };
-};
+// const randomPerson = (): Person => {
+//   return Math.random() > 0.5
+//     ? { name: 'Sally', study: () => console.log('Study Coding...') }
+//     : { name: 'Bob', login: () => console.log('Logged In...') };
+// };
 
-const person = randomPerson();
-// console.log(person);
+// const person = randomPerson();
+// // console.log(person);
 
-const isStudent = (person: Person): person is Student => {
-  //   return 'study' in person;
-  return (person as Student).study !== undefined;
-};
+// const isStudent = (person: Person): person is Student => {
+//   //   return 'study' in person;
+//   return (person as Student).study !== undefined;
+// };
 
-if (isStudent(person)) {
-  person.study();
-} else {
-  person.login();
-}
+// if (isStudent(person)) {
+//   person.study();
+// } else {
+//   person.login();
+// }
 
 /* -------------------------------------------------------------------------- */
 
