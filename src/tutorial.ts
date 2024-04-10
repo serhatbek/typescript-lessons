@@ -3,48 +3,96 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Generics - First Function and Interface
+// function createString(arg: string): string {
+//   return arg;
+// }
+// console.log(createString('apple'));
+
+// function createNumber(arg: number): number {
+//   return arg;
+// }
+// console.log(createNumber(6));
+
+function genericFunction<T>(arg: T): T {
+  return arg;
+}
+
+const someStringValue = genericFunction<string>('apple');
+const someNumberValue = genericFunction<number>(6);
+
+console.log('generic str:', someStringValue);
+console.log('generic num:', someNumberValue);
+
+interface GenericInterface<T> {
+  value: T;
+  getValue: () => T;
+}
+
+const genericString: GenericInterface<string> = {
+  value: 'Hello World',
+  getValue() {
+    return this.value;
+  },
+};
+
+console.log(genericString.getValue());
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
+// SECTION -  Generics
+// let array1: string[] = ['Apple', 'Banana', 'Mango'];
+// let array2: number[] = [1, 2, 3];
+// let array3: boolean[] = [true, false, true];
+
+// let array1: Array<string> = ['Apple', 'Banana', 'Mango'];
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Type Guards - Discriminated Unions
 //NOTE - A discriminated union in TypeScript is a type that can be one of several different types,
 //NOTE -  each identified by a unique literal property (the discriminator), allowing for type-safe handling of each possible variant.
 
-type IncrementAction = {
-  type: 'increment';
-  amount: number;
-  timestamp: number;
-  user: string;
-};
+// type IncrementAction = {
+//   type: 'increment';
+//   amount: number;
+//   timestamp: number;
+//   user: string;
+// };
 
-type DecrementAction = {
-  type: 'decrement';
-  amount: number;
-  timestamp: number;
-  user: string;
-};
+// type DecrementAction = {
+//   type: 'decrement';
+//   amount: number;
+//   timestamp: number;
+//   user: string;
+// };
 
-type Action = IncrementAction | DecrementAction;
+// type Action = IncrementAction | DecrementAction;
 
-const reducer = (state: number, action: Action) => {
-  switch (action.type) {
-    case 'increment':
-      return state + action.amount;
+// const reducer = (state: number, action: Action) => {
+//   switch (action.type) {
+//     case 'increment':
+//       return state + action.amount;
 
-    case 'decrement':
-      return state - action.amount;
+//     case 'decrement':
+//       return state - action.amount;
 
-    default:
-      const unexpectedAction: never = action;
-      throw new Error(`${unexpectedAction}`);
-  }
-};
+//     default:
+//       const unexpectedAction: never = action;
+//       throw new Error(`${unexpectedAction}`);
+//   }
+// };
 
-const newState = reducer(6, {
-  type: 'increment',
-  user: 'molly',
-  amount: 5,
-  timestamp: 345456,
-});
+// const newState = reducer(6, {
+//   type: 'increment',
+//   user: 'molly',
+//   amount: 5,
+//   timestamp: 345456,
+// });
 
-console.log(newState);
+// console.log(newState);
 
 /* -------------------------------------------------------------------------- */
 
