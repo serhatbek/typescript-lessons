@@ -3,34 +3,43 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Generics - Multiple Types
+function pair<T, U, V>(param1: T, param2: U, param3: V) {
+  return [param1, param2, param3];
+}
+console.log(pair<string, number, boolean>('Kitty', 369, true));
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Generics - Create Array
-function generateStringArray(length: number, value: string): string[] {
-  let result: string[] = [];
-  result = Array(length).fill(value);
-  return result;
-}
 
-console.log('generate string', generateStringArray(3, 'Cat'));
-/* -------------------------------------------------------------------------- */
-const stringArray = (length: number, value: string): string[] => {
-  let result: string[] = [];
-  for (let i = 0; i < length; i++) {
-    result.push(value);
-  }
-  return result;
-};
+// function generateStringArray(length: number, value: string): string[] {
+//   let result: string[] = [];
+//   result = Array(length).fill(value);
+//   return result;
+// }
 
-console.log('generate string arr', stringArray(3, 'Fish'));
-/* -------------------------------------------------------------------------- */
-function createArray<T>(length: number, value: T): Array<T> {
-  let result: T[] = [];
-  result = Array(length).fill(value);
-  return result;
-}
+// console.log('generate string', generateStringArray(3, 'Cat'));
+// /* -------------------------------------------------------------------------- */
+// const stringArray = (length: number, value: string): string[] => {
+//   let result: string[] = [];
+//   for (let i = 0; i < length; i++) {
+//     result.push(value);
+//   }
+//   return result;
+// };
 
-console.log(createArray<string>(6, 'Family'));
-console.log(createArray<boolean>(6, true));
-console.log(createArray<number>(6, 6));
+// console.log('generate string arr', stringArray(3, 'Fish'));
+// /* -------------------------------------------------------------------------- */
+// function createArray<T>(length: number, value: T): Array<T> {
+//   let result: T[] = [];
+//   result = Array(length).fill(value);
+//   return result;
+// }
+
+// console.log(createArray<string>(6, 'Family'));
+// console.log(createArray<boolean>(6, true));
+// console.log(createArray<number>(6, 6));
 
 /* -------------------------------------------------------------------------- */
 
