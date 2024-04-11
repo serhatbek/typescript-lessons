@@ -3,26 +3,58 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
-// SECTION - Generics - Promise Example
-
-async function someFunc(): Promise<string> {
-  return 'Hello World';
+// SECTION - Generics - Create Array
+function generateStringArray(length: number, value: string): string[] {
+  let result: string[] = [];
+  result = Array(length).fill(value);
+  return result;
 }
 
-const result = someFunc();
-console.log(
-  'result',
-  result.then((data) => console.log('result', data))
-);
-
-const otherFunc = async (): Promise<number> => {
-  return 6;
+console.log('generate string', generateStringArray(3, 'Cat'));
+/* -------------------------------------------------------------------------- */
+const stringArray = (length: number, value: string): string[] => {
+  let result: string[] = [];
+  for (let i = 0; i < length; i++) {
+    result.push(value);
+  }
+  return result;
 };
-const otherResult = otherFunc();
-console.log(
-  'other result',
-  otherResult.then((data) => console.log('other result', data))
-);
+
+console.log('generate string arr', stringArray(3, 'Fish'));
+/* -------------------------------------------------------------------------- */
+function createArray<T>(length: number, value: T): Array<T> {
+  let result: T[] = [];
+  result = Array(length).fill(value);
+  return result;
+}
+
+console.log(createArray<string>(6, 'Family'));
+console.log(createArray<boolean>(6, true));
+console.log(createArray<number>(6, 6));
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
+// SECTION - Generics - Promise Example
+
+// async function someFunc(): Promise<string> {
+//   return 'Hello World';
+// }
+
+// const result = someFunc();
+// console.log(
+//   'result',
+//   result.then((data) => console.log('result', data))
+// );
+
+// const otherFunc = async (): Promise<number> => {
+//   return 6;
+// };
+// const otherResult = otherFunc();
+// console.log(
+//   'other result',
+//   otherResult.then((data) => console.log('other result', data))
+// );
 
 /* -------------------------------------------------------------------------- */
 
