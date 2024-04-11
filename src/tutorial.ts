@@ -3,17 +3,25 @@
 /* =========================================================================== */
 
 // /* =========================================================================== */
-// SECTION - Fetch Data - Basics
+// SECTION - Fetch Data - Setup Type
 const url = 'https://www.course-api.com/react-tours-project';
 
-const fetchData = async (url: string) => {
+type Tour = {
+  id: string;
+  name: string;
+  info: string;
+  image: string;
+  price: string;
+};
+
+const fetchData = async (url: string): Promise<Tour[]> => {
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
+    const data: Tour[] = await response.json();
     // console.log('data', data);
     return data;
   } catch (error) {
@@ -26,7 +34,7 @@ const fetchData = async (url: string) => {
 
 const tours = await fetchData(url);
 // console.log(tours);
-tours.map((tour: any) => console.log(tour));
+tours.map((tour) => console.log(tour.name));
 export {};
 /* =========================================================================== */
 
