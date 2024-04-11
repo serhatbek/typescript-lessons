@@ -3,6 +3,30 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
+// SECTION - Generics - Promise Example
+
+async function someFunc(): Promise<string> {
+  return 'Hello World';
+}
+
+const result = someFunc();
+console.log(
+  'result',
+  result.then((data) => console.log('result', data))
+);
+
+const otherFunc = async (): Promise<number> => {
+  return 6;
+};
+const otherResult = otherFunc();
+console.log(
+  'other result',
+  otherResult.then((data) => console.log('other result', data))
+);
+
+/* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */
 // SECTION - Generics - First Function and Interface
 // function createString(arg: string): string {
 //   return arg;
@@ -14,29 +38,29 @@
 // }
 // console.log(createNumber(6));
 
-function genericFunction<T>(arg: T): T {
-  return arg;
-}
+// function genericFunction<T>(arg: T): T {
+//   return arg;
+// }
 
-const someStringValue = genericFunction<string>('apple');
-const someNumberValue = genericFunction<number>(6);
+// const someStringValue = genericFunction<string>('apple');
+// const someNumberValue = genericFunction<number>(6);
 
-console.log('generic str:', someStringValue);
-console.log('generic num:', someNumberValue);
+// console.log('generic str:', someStringValue);
+// console.log('generic num:', someNumberValue);
 
-interface GenericInterface<T> {
-  value: T;
-  getValue: () => T;
-}
+// interface GenericInterface<T> {
+//   value: T;
+//   getValue: () => T;
+// }
 
-const genericString: GenericInterface<string> = {
-  value: 'Hello World',
-  getValue() {
-    return this.value;
-  },
-};
+// const genericString: GenericInterface<string> = {
+//   value: 'Hello World',
+//   getValue() {
+//     return this.value;
+//   },
+// };
 
-console.log(genericString.getValue());
+// console.log(genericString.getValue());
 
 /* -------------------------------------------------------------------------- */
 
