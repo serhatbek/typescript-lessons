@@ -3,12 +3,67 @@
 /* -------------------------------------------------------------------------- */
 
 // /* -------------------------------------------------------------------------- */
-// SECTION - Generics - Multiple Types
+// SECTION - Generics - Multiple Types and  Type Constraints
 function pair<T, U, V>(param1: T, param2: U, param3: V) {
   return [param1, param2, param3];
 }
 console.log(pair<string, number, boolean>('Kitty', 369, true));
 /* -------------------------------------------------------------------------- */
+function processValue<T extends string | number>(value: T): T {
+  console.log(value);
+  return value;
+}
+processValue('Apple');
+processValue(6);
+// processValue(true);
+/* -------------------------------------------------------------------------- */
+type Car = {
+  brand: string;
+  model: string;
+};
+
+const car: Car = {
+  brand: 'ford',
+  model: 'mustang',
+};
+
+type Product = {
+  name: string;
+  price: number;
+};
+
+const product: Product = {
+  name: 'shoes',
+  price: 1.99,
+};
+
+type Student = {
+  name: string;
+  age: number;
+};
+
+const student: Student = {
+  name: 'peter',
+  age: 20,
+};
+
+// function printName<T extends Student>(input: T): void {
+//   console.log(input.name);
+// }
+
+// function printName<T extends Student | Product>(input: T): void {
+//   console.log(input.name);
+// }
+
+// Or
+
+function printName<T extends { name: string }>(input: T): void {
+  console.log(input.name);
+}
+
+printName(student);
+printName(product);
+printName(car); // NOTE - Argument of type 'Car' is not assignable to parameter of type '{ name: string; }'. Property 'name' is missing in type 'Car' but required in type '{ name: string; }'.
 
 // /* -------------------------------------------------------------------------- */
 // SECTION - Generics - Create Array
