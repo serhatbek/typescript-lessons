@@ -1,69 +1,121 @@
-// /* -------------------------------------------------------------------------- */
+// /* =========================================================================== */
 // SECTION -
-/* -------------------------------------------------------------------------- */
+/* =========================================================================== */
+
+// /* =========================================================================== */
+// SECTION - Fetch Data - Basics
+const url = 'https://www.course-api.com/react-tours-project';
+
+const fetchData = async (url: string) => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    // console.log('data', data);
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'There was an error...';
+    console.log(errorMessage);
+    return [];
+  }
+};
+
+const tours = await fetchData(url);
+// console.log(tours);
+tours.map((tour: any) => console.log(tour));
+export {};
+/* =========================================================================== */
+
+// /* =========================================================================== */
+// SECTION - Generics - Default Type
+// interface StoreData<T = any> {
+//   data: T[];
+// }
+
+// const storeStrings: StoreData<string> = {
+//   data: ['apple', 'banana'],
+// };
+
+// console.log(storeStrings);
+// /* -------------------------------------------------------------------------- */
+// const storeNumbers: StoreData<number> = {
+//   data: [3, 6, 9],
+// };
+// console.log(storeNumbers);
+// /* -------------------------------------------------------------------------- */
+// const randomData: StoreData = {
+//   data: ['apple', 3, 6, 9, 'banana'],
+// };
+// console.log(randomData);
+
+/* =========================================================================== */
 
 // /* -------------------------------------------------------------------------- */
 // SECTION - Generics - Multiple Types and  Type Constraints
-function pair<T, U, V>(param1: T, param2: U, param3: V) {
-  return [param1, param2, param3];
-}
-console.log(pair<string, number, boolean>('Kitty', 369, true));
-/* -------------------------------------------------------------------------- */
-function processValue<T extends string | number>(value: T): T {
-  console.log(value);
-  return value;
-}
-processValue('Apple');
-processValue(6);
-// processValue(true);
-/* -------------------------------------------------------------------------- */
-type Car = {
-  brand: string;
-  model: string;
-};
+// function pair<T, U, V>(param1: T, param2: U, param3: V) {
+//   return [param1, param2, param3];
+// }
+// console.log(pair<string, number, boolean>('Kitty', 369, true));
+// /* -------------------------------------------------------------------------- */
+// function processValue<T extends string | number>(value: T): T {
+//   console.log(value);
+//   return value;
+// }
+// processValue('Apple');
+// processValue(6);
+// // processValue(true);
+// /* -------------------------------------------------------------------------- */
+// type Car = {
+//   brand: string;
+//   model: string;
+// };
 
-const car: Car = {
-  brand: 'ford',
-  model: 'mustang',
-};
+// const car: Car = {
+//   brand: 'ford',
+//   model: 'mustang',
+// };
 
-type Product = {
-  name: string;
-  price: number;
-};
+// type Product = {
+//   name: string;
+//   price: number;
+// };
 
-const product: Product = {
-  name: 'shoes',
-  price: 1.99,
-};
+// const product: Product = {
+//   name: 'shoes',
+//   price: 1.99,
+// };
 
-type Student = {
-  name: string;
-  age: number;
-};
+// type Student = {
+//   name: string;
+//   age: number;
+// };
 
-const student: Student = {
-  name: 'peter',
-  age: 20,
-};
+// const student: Student = {
+//   name: 'peter',
+//   age: 20,
+// };
 
-// function printName<T extends Student>(input: T): void {
+// // function printName<T extends Student>(input: T): void {
+// //   console.log(input.name);
+// // }
+
+// // function printName<T extends Student | Product>(input: T): void {
+// //   console.log(input.name);
+// // }
+
+// // Or
+
+// function printName<T extends { name: string }>(input: T): void {
 //   console.log(input.name);
 // }
 
-// function printName<T extends Student | Product>(input: T): void {
-//   console.log(input.name);
-// }
-
-// Or
-
-function printName<T extends { name: string }>(input: T): void {
-  console.log(input.name);
-}
-
-printName(student);
-printName(product);
-printName(car); // NOTE - Argument of type 'Car' is not assignable to parameter of type '{ name: string; }'. Property 'name' is missing in type 'Car' but required in type '{ name: string; }'.
+// printName(student);
+// printName(product);
+// printName(car); // NOTE - Argument of type 'Car' is not assignable to parameter of type '{ name: string; }'. Property 'name' is missing in type 'Car' but required in type '{ name: string; }'.
 
 // /* -------------------------------------------------------------------------- */
 // SECTION - Generics - Create Array
