@@ -2,17 +2,30 @@
 // SECTION -
 /* =========================================================================== */
 
+import { z } from 'zod';
+
 // /* =========================================================================== */
-// SECTION - Fetch Data - Setup Type
+// SECTION - Fetch Data - Gotcha
+
 const url = 'https://www.course-api.com/react-tours-project';
 
-type Tour = {
-  id: string;
-  name: string;
-  info: string;
-  image: string;
-  price: string;
-};
+const tourSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  info: z.string(),
+  image: z.string(),
+  price: z.string(),
+});
+
+type Tour = z.infer<typeof tourSchema>;
+
+// type Tour = {
+//   id: string;
+//   name: string;
+//   info: string;
+//   image: string;
+//   price: string;
+// };
 
 const fetchData = async (url: string): Promise<Tour[]> => {
   try {
@@ -21,9 +34,14 @@ const fetchData = async (url: string): Promise<Tour[]> => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data: Tour[] = await response.json();
-    // console.log('data', data);
-    return data;
+    const rawData: Tour[] = await response.json();
+    // console.log('rawData', rawData);
+    const result = tourSchema.array().safeParse(rawData);
+    console.log(result);
+    if (!result.success) {
+      throw new Error(`Invalid data: ${result.error}`);
+    }
+    return result.data;
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : 'There was an error...';
