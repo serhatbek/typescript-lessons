@@ -24,9 +24,8 @@ taskForm?.addEventListener('submit', (event) => {
     };
     // add task to list
     addTask(task);
-    console.log(tasks);
     // render tasks
-
+    renderTask(task);
     // update local storage
 
     // if value clean everything and return
@@ -38,4 +37,10 @@ taskForm?.addEventListener('submit', (event) => {
 
 const addTask = (task: Task): void => {
   tasks.push(task);
+};
+
+const renderTask = (task: Task): void => {
+  const taskItem = document.createElement('li');
+  taskItem.textContent = task.description;
+  tasksListContainer?.appendChild(taskItem);
 };
