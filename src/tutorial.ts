@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 class Book {
   title: string;
-  author: string;
+  readonly author: string;
   checkedOut: boolean = false;
   constructor(title: string, author: string) {
     (this.title = title), (this.author = author);
@@ -19,6 +19,9 @@ const deepWork = new Book('Lestat', 'Anne Rice');
 console.log(deepWork);
 deepWork.checkedOut = true;
 console.log(deepWork.checkedOut);
+
+// deepWork.author = 'Susan Wallace'; // NOTE - Cannot assign to 'author' because it is a read-only property.ts(2540)
+console.log(deepWork.author);
 
 /* =========================================================================== */
 
