@@ -47,11 +47,32 @@ class Animal {
   getSomeValue() {
     return this.someValue;
   }
+  getInfo() {
+    return `${this.name} lives in ${this.habitat}`;
+  }
+
+  set checkOut(checkedOut: boolean) {
+    this.checkedOut = checkedOut;
+  }
+
+  get checkOut() {
+    return this.checkedOut;
+  }
+
+  get someInfo() {
+    this.checkOut = true;
+    return `${this.name} lives in ${this.habitat}`;
+  }
 }
 
 const bird = new Animal('Crow', 'Air', 6);
 console.log(bird);
 console.log(bird.getSomeValue());
+console.log(bird.getInfo());
+bird.checkOut = true;
+console.log(bird);
+
+console.log(bird.someInfo);
 
 /* =========================================================================== */
 
