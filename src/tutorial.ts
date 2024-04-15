@@ -6,35 +6,52 @@ import { z } from 'zod';
 // /* =========================================================================== */
 // SECTION - Classes
 
-class Book {
-  title: string;
-  readonly author: string;
+// class Book {
+//   title: string;
+//   readonly author: string;
+//   private checkedOut: boolean = false;
+//   constructor(title: string, author: string) {
+//     this.title = title;
+//     this.author = author;
+//   }
+
+//   checkOut() {
+//     this.checkedOut = this.toggleCheckedOutStatus();
+//   }
+//   isCheckedOut() {
+//     return this.checkedOut;
+//   }
+
+//   private toggleCheckedOutStatus() {
+//     return !this.checkedOut;
+//   }
+// }
+
+// const deepWork = new Book('Lestat', 'Anne Rice');
+// console.log(deepWork);
+
+// // deepWork.author = 'Susan Wallace'; // NOTE - Cannot assign to 'author' because it is a read-only property.ts(2540)
+// console.log(deepWork.author);
+// deepWork.checkOut();
+// deepWork.checkOut();
+// console.log(deepWork.isCheckedOut());
+
+/* -------------------------------------------------------------------------- */
+class Animal {
   private checkedOut: boolean = false;
-  constructor(title: string, author: string) {
-    this.title = title;
-    this.author = author;
-  }
-
-  checkOut() {
-    this.checkedOut = this.toggleCheckedOutStatus();
-  }
-  isCheckedOut() {
-    return this.checkedOut;
-  }
-
-  private toggleCheckedOutStatus() {
-    return !this.checkedOut;
+  constructor(
+    readonly name: string,
+    public habitat: string,
+    private someValue?: number
+  ) {}
+  getSomeValue() {
+    return this.someValue;
   }
 }
 
-const deepWork = new Book('Lestat', 'Anne Rice');
-console.log(deepWork);
-
-// deepWork.author = 'Susan Wallace'; // NOTE - Cannot assign to 'author' because it is a read-only property.ts(2540)
-console.log(deepWork.author);
-deepWork.checkOut();
-deepWork.checkOut();
-console.log(deepWork.isCheckedOut());
+const bird = new Animal('Crow', 'Air', 6);
+console.log(bird);
+console.log(bird.getSomeValue());
 
 /* =========================================================================== */
 
