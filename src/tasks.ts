@@ -7,9 +7,15 @@ type Task = {
   isCompleted: boolean;
 };
 
-const tasks: Task[] = [];
+const loadTasks = (): Task[] => {
+  const tasks = localStorage.getItem('tasks');
+  //   console.log(tasks);
+  return tasks ? JSON.parse(tasks) : [];
+};
 
-// if no value alert
+const tasks: Task[] = loadTasks();
+
+// render tasks
 
 // listen to submit event
 taskForm?.addEventListener('submit', (event) => {
@@ -27,7 +33,7 @@ taskForm?.addEventListener('submit', (event) => {
     // render tasks
     renderTask(task);
     // update local storage
-
+    updateLocalStorage();
     // if value clean everything and return
     taskInput.value = '';
     return;
@@ -43,4 +49,10 @@ const renderTask = (task: Task): void => {
   const taskItem = document.createElement('li');
   taskItem.textContent = task.description;
   tasksListContainer?.appendChild(taskItem);
+};
+
+tasks.forEach((task) => renderTask(task));
+
+const updateLocalStorage = (): void => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 };
