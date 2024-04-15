@@ -37,42 +37,61 @@ import { z } from 'zod';
 // console.log(deepWork.isCheckedOut());
 
 /* -------------------------------------------------------------------------- */
-class Animal {
-  private checkedOut: boolean = false;
-  constructor(
-    readonly name: string,
-    public habitat: string,
-    private someValue?: number
-  ) {}
-  getSomeValue() {
-    return this.someValue;
-  }
-  getInfo() {
-    return `${this.name} lives in ${this.habitat}`;
-  }
+// class Animal {
+//   private checkedOut: boolean = false;
+//   constructor(
+//     readonly name: string,
+//     public habitat: string,
+//     private someValue?: number
+//   ) {}
+//   getSomeValue() {
+//     return this.someValue;
+//   }
+//   getInfo() {
+//     return `${this.name} lives in ${this.habitat}`;
+//   }
 
-  set checkOut(checkedOut: boolean) {
-    this.checkedOut = checkedOut;
-  }
+//   set checkOut(checkedOut: boolean) {
+//     this.checkedOut = checkedOut;
+//   }
 
-  get checkOut() {
-    return this.checkedOut;
-  }
+//   get checkOut() {
+//     return this.checkedOut;
+//   }
 
-  get someInfo() {
-    this.checkOut = true;
-    return `${this.name} lives in ${this.habitat}`;
+//   get someInfo() {
+//     this.checkOut = true;
+//     return `${this.name} lives in ${this.habitat}`;
+//   }
+// }
+
+// const bird = new Animal('Crow', 'Air', 6);
+// console.log(bird);
+// console.log(bird.getSomeValue());
+// console.log(bird.getInfo());
+// bird.checkOut = true;
+// console.log(bird);
+
+// console.log(bird.someInfo);
+/* -------------------------------------------------------------------------- */
+interface IPerson {
+  name: string;
+  age: number;
+  greet(): void;
+}
+
+class Person implements IPerson {
+  constructor(public name: string, public age: number) {}
+  greet(): void {
+    console.log(
+      `Hello! My name is ${this.name} and I'm ${this.age} years old.`
+    );
   }
 }
 
-const bird = new Animal('Crow', 'Air', 6);
-console.log(bird);
-console.log(bird.getSomeValue());
-console.log(bird.getInfo());
-bird.checkOut = true;
-console.log(bird);
-
-console.log(bird.someInfo);
+const serhat = new Person('Serhat', 28);
+// console.log(serhat);
+serhat.greet();
 
 /* =========================================================================== */
 
