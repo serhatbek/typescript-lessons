@@ -1,59 +1,74 @@
+import { z } from 'zod';
 // /* =========================================================================== */
 // SECTION -
 /* =========================================================================== */
 
-import { z } from 'zod';
+// /* =========================================================================== */
+// SECTION - Classes
+
+class Book {
+  title: string;
+  author: string;
+  constructor(title: string, author: string) {
+    (this.title = title), (this.author = author);
+  }
+}
+
+const deepWork = new Book('Lestat', 'Anne Rice');
+console.log(deepWork);
+
+/* =========================================================================== */
 
 // /* =========================================================================== */
 // SECTION - Fetch Data - Gotcha
 
-const url = 'https://www.course-api.com/react-tours-project';
+// const url = 'https://www.course-api.com/react-tours-project';
 
-const tourSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  info: z.string(),
-  image: z.string(),
-  price: z.string(),
-});
+// const tourSchema = z.object({
+//   id: z.string(),
+//   name: z.string(),
+//   info: z.string(),
+//   image: z.string(),
+//   price: z.string(),
+// });
 
-type Tour = z.infer<typeof tourSchema>;
+// type Tour = z.infer<typeof tourSchema>;
 
-// type Tour = {
-//   id: string;
-//   name: string;
-//   info: string;
-//   image: string;
-//   price: string;
+// // type Tour = {
+// //   id: string;
+// //   name: string;
+// //   info: string;
+// //   image: string;
+// //   price: string;
+// // };
+
+// const fetchData = async (url: string): Promise<Tour[]> => {
+//   try {
+//     const response = await fetch(url);
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const rawData: Tour[] = await response.json();
+//     // console.log('rawData', rawData);
+//     const result = tourSchema.array().safeParse(rawData);
+//     // console.log(result);
+//     if (!result.success) {
+//       throw new Error(`Invalid data: ${result.error}`);
+//     }
+//     return result.data;
+//   } catch (error) {
+//     const errorMessage =
+//       error instanceof Error ? error.message : 'There was an error...';
+//     console.log(errorMessage);
+//     return [];
+//   }
 // };
 
-const fetchData = async (url: string): Promise<Tour[]> => {
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const rawData: Tour[] = await response.json();
-    // console.log('rawData', rawData);
-    const result = tourSchema.array().safeParse(rawData);
-    console.log(result);
-    if (!result.success) {
-      throw new Error(`Invalid data: ${result.error}`);
-    }
-    return result.data;
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'There was an error...';
-    console.log(errorMessage);
-    return [];
-  }
-};
-
-const tours = await fetchData(url);
-// console.log(tours);
-tours.map((tour) => console.log(tour.name));
-export {};
+// const tours = await fetchData(url);
+// // console.log(tours);
+// tours.map((tour) => console.log(tour.name));
+// export {};
 /* =========================================================================== */
 
 // /* =========================================================================== */
@@ -82,6 +97,7 @@ export {};
 
 // /* -------------------------------------------------------------------------- */
 // SECTION - Generics - Multiple Types and  Type Constraints
+
 // function pair<T, U, V>(param1: T, param2: U, param3: V) {
 //   return [param1, param2, param3];
 // }
