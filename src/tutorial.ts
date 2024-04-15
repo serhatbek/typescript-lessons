@@ -3,6 +3,19 @@ import { z } from 'zod';
 // SECTION -
 /* =========================================================================== */
 
+// const btn = document.querySelector<HTMLButtonElement>('.test-btn')!;
+// btn.disabled = true;
+
+// const btn = document.querySelector<HTMLButtonElement>('.test-btn');
+// if (btn) {
+//   btn.disabled = true;
+// }
+
+// const btn = document.querySelector('.test-btn')! as HTMLButtonElement; // type assertion
+// if (btn) {
+//   btn.disabled = true;
+// }
+
 // /* =========================================================================== */
 // SECTION - Classes
 
@@ -74,24 +87,24 @@ import { z } from 'zod';
 
 // console.log(bird.someInfo);
 /* -------------------------------------------------------------------------- */
-interface IPerson {
-  name: string;
-  age: number;
-  greet(): void;
-}
+// interface IPerson {
+//   name: string;
+//   age: number;
+//   greet(): void;
+// }
 
-class Person implements IPerson {
-  constructor(public name: string, public age: number) {}
-  greet(): void {
-    console.log(
-      `Hello! My name is ${this.name} and I'm ${this.age} years old.`
-    );
-  }
-}
+// class Person implements IPerson {
+//   constructor(public name: string, public age: number) {}
+//   greet(): void {
+//     console.log(
+//       `Hello! My name is ${this.name} and I'm ${this.age} years old.`
+//     );
+//   }
+// }
 
-const serhat = new Person('Serhat', 28);
-// console.log(serhat);
-serhat.greet();
+// const serhat = new Person('Serhat', 28);
+// // console.log(serhat);
+// serhat.greet();
 
 /* =========================================================================== */
 
