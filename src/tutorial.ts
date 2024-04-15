@@ -9,6 +9,7 @@ import { z } from 'zod';
 class Book {
   title: string;
   author: string;
+  checkedOut: boolean = false;
   constructor(title: string, author: string) {
     (this.title = title), (this.author = author);
   }
@@ -16,6 +17,8 @@ class Book {
 
 const deepWork = new Book('Lestat', 'Anne Rice');
 console.log(deepWork);
+deepWork.checkedOut = true;
+console.log(deepWork.checkedOut);
 
 /* =========================================================================== */
 
