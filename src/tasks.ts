@@ -1,4 +1,4 @@
-const taskInput = document.querySelector<HTMLInputElement>('.form-input');
+const taskInput = document.querySelector<HTMLInputElement>('.form-input')!;
 const taskForm = document.querySelector<HTMLFormElement>('.form');
 const tasksListContainer = document.querySelector<HTMLUListElement>('.list');
 
@@ -46,8 +46,34 @@ const addTask = (task: Task): void => {
 };
 
 const renderTask = (task: Task): void => {
+  const taskActionContainer = document.createElement('div');
+
+  // checkbox
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.checked = task.isCompleted;
+  checkbox.addEventListener('change', () => {
+    task.isCompleted = !task.isCompleted;
+    updateLocalStorage();
+  });
+
+  // delete task btn
+  const deleteTaskBtn = document.createElement('button');
+  deleteTaskBtn.className = 'btn';
+  deleteTaskBtn.textContent = 'Delete';
+  deleteTaskBtn.addEventListener('click', (event) => {
+    const liElement = (event.currentTarget as HTMLElement).parentElement
+      ?.parentElement;
+    liElement?.remove();
+    updateLocalStorage();
+  });
+
   const taskItem = document.createElement('li');
   taskItem.textContent = task.description;
+
+  taskActionContainer.appendChild(checkbox);
+  taskActionContainer.appendChild(deleteTaskBtn);
+  taskItem.appendChild(taskActionContainer);
   tasksListContainer?.appendChild(taskItem);
 };
 
